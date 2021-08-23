@@ -11,10 +11,10 @@ Access all the hidden vanilla armor stands options with an easy menu. Perfect fo
 
 - Enable arms, invisible baseplates, no gravity and much more for your armorstand.
 - Arange all body parts in a fancy pose you want. Or choose one of the various preset poses!
-- Colorable Names! 
-- Invisible Armor Stands! Perfect for floating letters or items!
-- Player Heads! Get the head of every player you want and place it on your Armor Stand (this feature can be fully disabled!)!
-- Invulnerable Armor Stands! Save from accidental punches!
+- Colorable names! 
+- Invisible armor stands! Perfect for floating letters or items!
+- Player heads! Get the head of every player you want and place it on your armor stand (this feature can be fully disabled!)!
+- Invulnerable armor stands! Save from accidental punches!
 
 ### How to use?
 
