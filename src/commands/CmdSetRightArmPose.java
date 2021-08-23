@@ -1,6 +1,7 @@
 package commands;
 
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
@@ -55,8 +56,8 @@ public class CmdSetRightArmPose implements CommandInterface {
             }
 
             else {
-                player.sendMessage("§c[AA] This command was not used correctly! To modify the right arm pose use §b/aa rap <pitch> <roll> <yaw> <range>§6!");
-                player.sendMessage("§c[AA] Note: §b<pitch> <roll> §6and §b<yaw> §6are degrees from 0 to 360!");
+                player.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use " + ChatColor.AQUA + "/aa rap <roll> <yaw> <pitch> <range>");
+                player.sendMessage(ChatColor.RED + "[AA] Note: <roll> <yaw> and <pitch> are degrees from 0 to 360!");
             }
 
         }

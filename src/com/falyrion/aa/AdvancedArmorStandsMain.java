@@ -35,6 +35,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         commandHandler.registerCommand("gravity", new CmdSetGravity());
         commandHandler.registerCommand("invulnerable", new CmdSetInvulnerable());
         commandHandler.registerCommand("visible", new CmdSetVisibility());
+        commandHandler.registerCommand("glow", new CmdGlow());
         commandHandler.registerCommand("hp", new CmdSetHeadPose());
         commandHandler.registerCommand("bp", new CmdSetBodyPose());
         commandHandler.registerCommand("rap", new CmdSetRightArmPose());
@@ -102,7 +103,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClickHandler(), this);
 
         System.out.println("++++++++++++++++++++++ [Advanced ArmorStands] ++++++++++++++++++++++");
-        System.out.println("[AdvancedArmorStands] Version " + aaVersion + "enabled");
+        System.out.println("[AdvancedArmorStands] Version " + aaVersion + " enabled");
         System.out.println("[Advanced ArmorStands] Attention: This version supports bukkit " + apiVersion + " only.");
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }

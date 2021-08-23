@@ -1,6 +1,7 @@
 package commands;
 
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
@@ -55,8 +56,8 @@ public class CmdSetBodyPose implements CommandInterface {
             }
 
             else {
-                p.sendMessage("§c[AA] This command was not used correctly! Please use §b/aa bp <pitch> <roll> <yaw> <range>§c!");
-                p.sendMessage("§c[AA] Note: §b<pitch> <roll> §cand §b<yaw> §care degrees from 0 to 360!");
+                p.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use " + ChatColor.AQUA + "/aa bp <roll> <yaw> <pitch> <range>");
+                p.sendMessage(ChatColor.RED + "[AA] Note: <roll> <yaw> and <pitch> are degrees from 0 to 360!");
             }
 
         }

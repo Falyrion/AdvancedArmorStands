@@ -69,12 +69,12 @@ public class CmdHelp implements CommandInterface {
                     p.sendMessage(ChatColor.GOLD + "[Advanced ArmorStands] All Commands [Page 2/3]");
                     p.sendMessage(" ");
                     p.sendMessage(ChatColor.GOLD + "Poses");
-                    p.sendMessage(ChatColor.AQUA + "/aa hp <pitch> <roll> <yaw> <range> " + ChatColor.WHITE + "Modify head-pose");
-                    p.sendMessage(ChatColor.AQUA + "/aa bp <pitch> <roll> <yaw> <range> " + ChatColor.WHITE + "Modify body-pose");
-                    p.sendMessage(ChatColor.AQUA + "/aa rap <pitch> <roll> <yaw> <range> " + ChatColor.WHITE + "Modify right-arm-pose");
-                    p.sendMessage(ChatColor.AQUA + "/aa lap <pitch> <roll> <yaw> <range> " + ChatColor.WHITE + "Modify left-arm-pose");
-                    p.sendMessage(ChatColor.AQUA + "/aa rlp <pitch> <roll> <yaw> <range> " + ChatColor.WHITE + "Modify right-leg-pose");
-                    p.sendMessage(ChatColor.AQUA + "/aa llp <pitch> <roll> <yaw> <range> " + ChatColor.WHITE + "Modify left-leg-pose");
+                    p.sendMessage(ChatColor.AQUA + "/aa hp <roll> <yaw> <pitch> <range> " + ChatColor.WHITE + "Modify head-pose");
+                    p.sendMessage(ChatColor.AQUA + "/aa bp <roll> <yaw> <pitch> <range> " + ChatColor.WHITE + "Modify body-pose");
+                    p.sendMessage(ChatColor.AQUA + "/aa rap <roll> <yaw> <pitch> <range> " + ChatColor.WHITE + "Modify right-arm-pose");
+                    p.sendMessage(ChatColor.AQUA + "/aa lap <roll> <yaw> <pitch> <range> " + ChatColor.WHITE + "Modify left-arm-pose");
+                    p.sendMessage(ChatColor.AQUA + "/aa rlp <roll> <yaw> <pitch> <range> " + ChatColor.WHITE + "Modify right-leg-pose");
+                    p.sendMessage(ChatColor.AQUA + "/aa llp <roll> <yaw> <pitch> <range> "+ ChatColor.WHITE + "Modify left-leg-pose");
                     p.sendMessage(" ");
                     p.sendMessage(ChatColor.GOLD + "See §b/aa help <page-number> §6for more! [Page 2/3]");
                     TextComponent msg = new TextComponent(ChatColor.GOLD + "For a full documentation in your browser click §bhere§6!");

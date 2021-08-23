@@ -468,7 +468,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lName Help":
-                if(player.hasPermission("aa.names")) {
+                if (player.hasPermission("aa.names")) {
                     player.sendMessage(ChatColor.GOLD + "==============[AA] Name-Help==============");
                     player.sendMessage("§fUse §b/aa name <text> §fto give your armor stand a custom name! This command affects every armor stand in 1 block range around you!");
                     player.sendMessage("§fWrite '&' and a number in front of your text to give it a specific color.");
@@ -487,6 +487,46 @@ public class InventoryClickHandler implements Listener {
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
                     player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                }
+                break;
+
+            case  "§e§lMake glowing":
+                if (player.hasPermission("aa.edit")) {
+                    for(Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)) {
+                        if(entity instanceof ArmorStand) {
+                            if(entity.isGlowing()) {
+                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand is already glowing!");
+                            } else {
+                                ArmorStand armorstand = (ArmorStand) entity;
+                                armorstand.setGlowing(true);
+                                player.sendMessage(ChatColor.GOLD + "[AA] Added glow effect to a nearby armor stand!");
+                            }
+                        }
+                    }
+                    AdvancedArmorStandsMain.getInstance().playSoundClick(player);
+                } else{
+                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    AdvancedArmorStandsMain.getInstance().playSoundBass(player);
+                }
+                break;
+
+            case  "§e§lRemove glow":
+                if (player.hasPermission("aa.edit")) {
+                    for(Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)) {
+                        if(entity instanceof ArmorStand) {
+                            if(entity.isGlowing()) {
+                                ArmorStand armorstand = (ArmorStand) entity;
+                                armorstand.setGlowing(false);
+                                player.sendMessage(ChatColor.GOLD + "[AA] Removed glow effect from a nearby armor stand!");
+                            } else {
+                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand has no glow effect to remove!");
+                            }
+                        }
+                    }
+                    AdvancedArmorStandsMain.getInstance().playSoundClick(player);
+                } else{
+                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
 
@@ -822,12 +862,12 @@ public class InventoryClickHandler implements Listener {
     }
 
 
-    private void setArmorStandPose(Player player, double rap_pitch, double rap_roll, double rap_yaw,
-                                   double lap_pitch, double lap_roll, double lap_yaw,
-                                   double rlp_pitch, double rlp_roll, double rlp_yaw,
-                                   double llp_pitch, double llp_roll, double llp_yaw,
-                                   double hp_pitch, double hp_roll, double hp_yaw,
-                                   double bp_pitch, double bp_roll, double bp_yaw) {
+    private void setArmorStandPose(Player player, double rightArmRoll, double rightArmYaw, double rightArmPitch,
+                                   double leftArmRoll, double leftArmYaw, double leftArmPitch,
+                                   double rightLegRoll, double rightLegYaw, double rightLegPitch,
+                                   double leftLegRoll, double LeftLegYaw, double llp_yaw,
+                                   double headRoll, double headYaw, double headPitch,
+                                   double bodyRoll, double bodyYaw, double bodyPitch) {
 
         /**
          * Helper function for handleEventPresetPoseMenu()
@@ -844,46 +884,46 @@ public class InventoryClickHandler implements Listener {
                 armorStand.setGravity(false);
 
                 // Calculate and set right arm settings
-                rap_pitch = Math.toRadians(rap_pitch);
-                rap_roll = Math.toRadians(rap_roll);
-                rap_yaw = Math.toRadians(rap_yaw);
-                EulerAngle rap_ea = new EulerAngle(rap_pitch, rap_roll, rap_yaw);
-                armorStand.setRightArmPose(rap_ea);
+                rightArmRoll = Math.toRadians(rightArmRoll);
+                rightArmYaw = Math.toRadians(rightArmYaw);
+                rightArmPitch = Math.toRadians(rightArmPitch);
+                EulerAngle rightArmEulerAngle = new EulerAngle(rightArmRoll, rightArmYaw, rightArmPitch);
+                armorStand.setRightArmPose(rightArmEulerAngle);
 
                 // Calculate and set left arm settings
-                lap_pitch = Math.toRadians(lap_pitch);
-                lap_roll = Math.toRadians(lap_roll);
-                lap_yaw = Math.toRadians(lap_yaw);
-                EulerAngle lap_ea = new EulerAngle(lap_pitch, lap_roll, lap_yaw);
-                armorStand.setLeftArmPose(lap_ea);
+                leftArmRoll = Math.toRadians(leftArmRoll);
+                leftArmYaw = Math.toRadians(leftArmYaw);
+                leftArmPitch = Math.toRadians(leftArmPitch);
+                EulerAngle leftArmEulerAngle = new EulerAngle(leftArmRoll, leftArmYaw, leftArmPitch);
+                armorStand.setLeftArmPose(leftArmEulerAngle);
 
                 // Calculate and set right leg settings
-                rlp_pitch = Math.toRadians(rlp_pitch);
-                rlp_roll = Math.toRadians(rlp_roll);
-                rlp_yaw = Math.toRadians(rlp_yaw);
-                EulerAngle rlp_ea = new EulerAngle(rlp_pitch, rlp_roll, rlp_yaw);
-                armorStand.setRightLegPose(rlp_ea);
+                rightLegRoll = Math.toRadians(rightLegRoll);
+                rightLegYaw = Math.toRadians(rightLegYaw);
+                rightLegPitch = Math.toRadians(rightLegPitch);
+                EulerAngle rightLegEulerAngle = new EulerAngle(rightLegRoll, rightLegYaw, rightLegPitch);
+                armorStand.setRightLegPose(rightLegEulerAngle);
 
                 // Calculate and set left leg settings
-                llp_pitch = Math.toRadians(llp_pitch);
-                llp_roll = Math.toRadians(llp_roll);
+                leftLegRoll = Math.toRadians(leftLegRoll);
+                LeftLegYaw = Math.toRadians(LeftLegYaw);
                 llp_yaw = Math.toRadians(llp_yaw);
-                EulerAngle llp_ea = new EulerAngle(llp_pitch, llp_roll, llp_yaw);
-                armorStand.setLeftLegPose(llp_ea);
+                EulerAngle leftLegEulerAngle = new EulerAngle(leftLegRoll, LeftLegYaw, llp_yaw);
+                armorStand.setLeftLegPose(leftLegEulerAngle);
 
                 // Calculate and set body settings
-                bp_pitch = Math.toRadians(bp_pitch);
-                bp_roll = Math.toRadians(bp_roll);
-                bp_yaw = Math.toRadians(bp_yaw);
-                EulerAngle bp_ea = new EulerAngle(bp_pitch, bp_roll, bp_yaw);
-                armorStand.setBodyPose(bp_ea);
+                bodyRoll = Math.toRadians(bodyRoll);
+                bodyYaw = Math.toRadians(bodyYaw);
+                bodyPitch = Math.toRadians(bodyPitch);
+                EulerAngle bodyEulerAngle = new EulerAngle(bodyRoll, bodyYaw, bodyPitch);
+                armorStand.setBodyPose(bodyEulerAngle);
 
                 // Calculate and set head settings
-                hp_pitch = Math.toRadians(hp_pitch);
-                hp_roll = Math.toRadians(hp_roll);
-                hp_yaw = Math.toRadians(hp_yaw);
-                EulerAngle hp_ea = new EulerAngle(hp_pitch, hp_roll, hp_yaw);
-                armorStand.setHeadPose(hp_ea);
+                headRoll = Math.toRadians(headRoll);
+                headYaw = Math.toRadians(headYaw);
+                headPitch = Math.toRadians(headPitch);
+                EulerAngle headEulerAngle = new EulerAngle(headRoll, headYaw, headPitch);
+                armorStand.setHeadPose(headEulerAngle);
 
                 // Send success message to player
                 player.sendMessage(ChatColor.GOLD + "[AA] Modified a nearby armor stand!");

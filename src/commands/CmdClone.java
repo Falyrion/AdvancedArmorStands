@@ -21,7 +21,6 @@ public class CmdClone implements CommandInterface {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
         Player p = (Player) sender;
-        if(args.length > 4) return false;
 
         if(p.hasPermission("aa.clone")){
 
