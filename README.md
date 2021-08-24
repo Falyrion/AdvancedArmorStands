@@ -1,6 +1,6 @@
 # Advanced Armor Stands
  
-This is a Plugin for CraftBukkit/ Spigot. Download from [https://www.spigotmc.org/resources/advanced-armor-stands.38513/](https://www.spigotmc.org/resources/advanced-armor-stands.38513/)
+This is a plugin for CraftBukkit/ Spigot. Download from [https://www.spigotmc.org/resources/advanced-armor-stands.38513/](https://www.spigotmc.org/resources/advanced-armor-stands.38513/)
 
 
 # Overview
@@ -22,11 +22,11 @@ Just stand next to the armor stand you want to modify and type the command `/aa`
 
 # Depencies
 
-This Plugin was made for Spigot v.1.17.x
+This plugin was made for Spigot v.1.17.x
 
 # Commands and Permissions
 
-Overview over all Commands available in this plugin. All Permissions are set to `true` by default.
+Overview over all commands available in this plugin. All permissions are set to `true` by default.
 
 | Command                                            | Permission | Description                      |
 | -------------------------------------------------- |:----------:|:--------------------------------:|
