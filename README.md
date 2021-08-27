@@ -2,7 +2,14 @@
  
 This is a plugin for CraftBukkit/ Spigot. Download from [https://www.spigotmc.org/resources/advanced-armor-stands.38513/](https://www.spigotmc.org/resources/advanced-armor-stands.38513/)
 
+### Contents
+- [Overview and Features](#overview)
+- [Depencies](#depencies)
+- [Commands and Permissions](#commands)
+- [Languages](#language)
 
+
+<a name="overview"></a>
 # Overview
 
 Access all the hidden vanilla armor stands options with an easy menu. Perfect for decoration on survival servers and builders!
@@ -20,14 +27,17 @@ Access all the hidden vanilla armor stands options with an easy menu. Perfect fo
 
 Just stand next to the armor stand you want to modify and type the command `/aa` in chat! A menu will pop up with all available options!
 
+<a name="depencies"></a>
 # Depencies
 
-This plugin was made for Spigot v.1.17.x
+This plugin was made for Spigot v.1.17.x.
 
+<a name="commands"></a>
 # Commands and Permissions
 
 - Overview over all commands available in this plugin. All permissions are set to `true` by default.
 - If you want to disable access to player heads in both menu and per command, set the permission `aa.head` to `false`.
+
 
 | Command                                            | Permission | Description                      |
 | -------------------------------------------------- |:----------:|:--------------------------------:|
@@ -56,3 +66,9 @@ This plugin was made for Spigot v.1.17.x
 | /aa head \<player-name> \<amount>                  |  aa.head   | Gives the head of a player. Use \<player-name> for the player name and \<amount> for the amount of heads you want.|
 | /aa give \<amount>                                 |  NONE      | Adds an armor stand to your inventory. Player needs creative mode to use this. | 
 
+<a name="language"></a>
+# Languages
+
+AdvancedArmorStands can support multiple languages simultaneously. The language used is the language the user has set in his game settings. If that language is not available, egnlish is the default option.
+- To add a new language, navigate to the file `AdvancedArmorStands/ressources/lang.yml` in your servers plugin folder. Copy the section "default" and paste it to the bottom of the file. Replace the string "en_us" in your pasted section with your desired language string. After that replace all the english sentences with your own language.
+- If you want to add a new language, consider sending it in to be added to the plugin. That way all players can benefit from it.
