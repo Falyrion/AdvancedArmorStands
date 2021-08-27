@@ -1,6 +1,8 @@
 package commands;
 
+import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
@@ -13,54 +15,73 @@ public class CmdToogleBaseplate implements CommandInterface {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
-        if (p.hasPermission("aa.edit")) {
+        if (player.hasPermission("aa.edit")) {
 
             if (args.length == 3) {
 
-                Float f = Float.parseFloat(args[2]);
+                Float distance = Float.parseFloat(args[2]);
 
-                if (f <= 100) {
+                if (!args[1].equalsIgnoreCase("on") && !args[1].equalsIgnoreCase("off")) {
 
-                    if (args[1].equalsIgnoreCase("on")) {
-                        for (Entity entity : p.getNearbyEntities(f, f, f)) {
+                    String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                    player.sendMessage(ChatColor.RED + message + ChatColor.AQUA + " /aa base <on/off> <range>");
+
+                } else {
+
+                    if (distance <= 100) {
+
+                        for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                             if (entity instanceof ArmorStand) {
                                 ArmorStand armorstand = (ArmorStand) entity;
-                                armorstand.setBasePlate(true);
+
+                                switch (args[1]) {
+                                    case "on":
+                                        if (!armorstand.hasBasePlate()) {
+                                            armorstand.setBasePlate(true);
+                                        }
+                                        break;
+
+                                    case "off":
+                                        if (armorstand.hasBasePlate()) {
+                                            armorstand.setBasePlate(false);
+                                        }
+                                        break;
+                                }
+
+                                String message = AdvancedArmorStandsMain.getInstance().getMessageString("modification", player.getLocale()).replace("%s", distance.toString());
+                                player.sendMessage(ChatColor.GOLD + message);
+
                             }
                         }
-                        p.sendMessage("§6[AA] Modified all armor stands in " + f + " blocks range!");
+
+                    } else {
+
+                        String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
+                        player.sendMessage(ChatColor.RED + message);
+
                     }
 
-                    if (args[1].equalsIgnoreCase("off")) {
-                        for (Entity entity : p.getNearbyEntities(f, f, f)) {
-                            if (entity instanceof ArmorStand) {
-                                ArmorStand armorstand = (ArmorStand) entity;
-                                armorstand.setBasePlate(false);
-                            }
-                        }
-                        p.sendMessage("§6[AA] Modified all armor stands in " + f + " blocks range!");
-                    }
-                    if (!args[1].equalsIgnoreCase("on") && !args[1].equalsIgnoreCase("off")) {
-                        p.sendMessage("§6[AA]§f This command was not used correctly! Please use §b/aa base <on/off> <range>");
-                    }
-
-                }
-
-                if (f > 100) {
-                    p.sendMessage("§c[AA] Please do not use higher values than 100 for the range!");
                 }
 
             } else {
-                p.sendMessage("§c[AA] This command was not used correctly! Please use §b/aa base <on/off> <range>");
+
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                player.sendMessage(ChatColor.RED + message + ChatColor.AQUA + " /aa glow <on/off> <range>");
+
             }
 
         } else {
-            p.sendMessage("§c[AA] Sorry, but you have no permission to use this command!");
+
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(ChatColor.RED + message);
+
         }
 
         return true;
+
     }
 
 }
+

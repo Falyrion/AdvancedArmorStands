@@ -30,14 +30,18 @@ public class CommandHandler implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String commandLabel, String[] arguments) {
 
-        if(commandSender instanceof Player) {
-            if(arguments.length > 0){
-                if(doesCommandExist(arguments[0])) {
+        if (commandSender instanceof Player) {
+            if (arguments.length > 0) {
+                if (doesCommandExist(arguments[0])) {
                     getCommandExecutor(arguments[0]).onCommand(commandSender, command, commandLabel, arguments);
                     return true;
 
                 } else {
-                    commandSender.sendMessage(ChatColor.RED + "[AA] Sorry, but this command does not exist!");
+
+                    Player player = (Player) commandSender;
+                    String message = AdvancedArmorStandsMain.getInstance().getMessageString("command_not_exist", player.getLocale());
+                    player.sendMessage(org.bukkit.ChatColor.RED + message);
+
                     return true;
                 }
 

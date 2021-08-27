@@ -2,6 +2,7 @@ package commands;
 
 import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -15,21 +16,21 @@ public class CmdSetRotation implements CommandInterface {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
-        if (p.hasPermission("aa.edit")) {
+        if (player.hasPermission("aa.edit")) {
 
             if (args.length == 4) {
 
-                Float f = Float.parseFloat(args[3]);
+                Float distance = Float.parseFloat(args[3]);
 
-                if (f <= 100) {
+                if (distance <= 100) {
 
                     Integer i4 = Integer.parseInt(args[2]);
                     if (i4 == 45 || i4 == 90 || i4 == 135 || i4 == 180 || i4 == 225 || i4 == 270 || i4 == 315 || i4 == 360) {
 
                         if (args[1].equalsIgnoreCase("right")) {
-                            for (Entity entity : p.getNearbyEntities(f, f, f)) {
+                            for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                                 if(entity instanceof ArmorStand) {
                                     ArmorStand armorstand = (ArmorStand) entity;
                                     Location loc = armorstand.getLocation();
@@ -39,12 +40,13 @@ public class CmdSetRotation implements CommandInterface {
                                 }
                             }
 
-                            p.sendMessage("§6[AA] Modified all armor stands in " + f + " blocks range!");
+                            String message = AdvancedArmorStandsMain.getInstance().getMessageString("modification", player.getLocale()).replace("%s", distance.toString());
+                            player.sendMessage(ChatColor.GOLD + message);
 
-                            AdvancedArmorStandsMain.getInstance().playSoundTeleport(p);
+                            AdvancedArmorStandsMain.getInstance().playSoundTeleport(player);
                         }
                         if (args[1].equalsIgnoreCase("left")) {
-                            for (Entity entity : p.getNearbyEntities(f, f, f)) {
+                            for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                                 if(entity instanceof ArmorStand) {
                                     ArmorStand armorstand = (ArmorStand) entity;
                                     Location loc = armorstand.getLocation();
@@ -53,37 +55,56 @@ public class CmdSetRotation implements CommandInterface {
                                     armorstand.teleport(loc);
                                 }
                             }
-                            p.sendMessage("§6[AA] Modified all armor stands in " + f + " blocks range!");
 
-                            AdvancedArmorStandsMain.getInstance().playSoundTeleport(p);
+                            String message = AdvancedArmorStandsMain.getInstance().getMessageString("modification", player.getLocale()).replace("%s", distance.toString());
+                            player.sendMessage(ChatColor.GOLD + message);
+
+                            AdvancedArmorStandsMain.getInstance().playSoundTeleport(player);
                         }
                         if (!args[1].equalsIgnoreCase("right") && !args[1].equalsIgnoreCase("left")) {
-                            p.sendMessage("§c[AA] This command was not used correctly! Please use §b/aa rotate <right/left> <rotation> <range>§c!");
+
+                            String message_01 = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                            player.sendMessage(ChatColor.RED + message_01 + ChatColor.AQUA + " /aa rotate <on/off> <range>");
+
                         }
 
 
                     }
                     else {
-                        p.sendMessage("§c[AA] This command was not used correctly! Please use §b/aa rotate <right/left> <rotation> <range>§c! ");
-                        p.sendMessage("§c[AA] Note: Available degrees for the rotation are 45; 90; 135; 180; 225; 270; 315 and 360!");
+
+                        String message_01 = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                        String message_02 = AdvancedArmorStandsMain.getInstance().getMessageString("rotation_error_01", player.getLocale());
+                        player.sendMessage(ChatColor.RED + message_01 + ChatColor.AQUA + " /aa rotate <on/off> <range>");
+                        player.sendMessage(ChatColor.RED + message_02);
+
                     }
 
                 }
 
-                if (f > 100) {
-                    p.sendMessage("§c[AA] Please do not use higher values than 100 for the range!");
+                if (distance > 100) {
+
+                    String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
+                    player.sendMessage(ChatColor.RED + message);
+
                 }
 
             }
 
             else {
-                p.sendMessage("§c[AA] This command was not used correctly! Please use §b/aa rotate <right/left> <rotation> <range>§c!");
-                p.sendMessage("§c[AA] Note: Available degrees for the rotation are 45; 90; 135; 180; 225; 270; 315 and 360!");
+
+                String message_01 = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                String message_02 = AdvancedArmorStandsMain.getInstance().getMessageString("rotation_error_01", player.getLocale());
+                player.sendMessage(ChatColor.RED + message_01 + ChatColor.AQUA + " /aa rotate <on/off> <range>");
+                player.sendMessage(ChatColor.RED + message_02);
+
             }
 
         }
         else {
-            p.sendMessage("§c[AA] Sorry, but you have no permission to use this command!");
+
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(ChatColor.RED + message);
+
         }
 
         return true;

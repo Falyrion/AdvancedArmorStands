@@ -1,5 +1,6 @@
 package commands;
 
+import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
@@ -16,36 +17,52 @@ public class CmdRemoveCustomName implements CommandInterface {
 
         Player player = (Player) sender;
 
-        if (player.hasPermission("aa.names")) {
+        if (player.hasPermission("aa.edit")) {
 
             if (args.length == 2) {
 
-                Float f = Float.parseFloat(args[1]);
+                Float distance = Float.parseFloat(args[1]);
 
-                if (f <= 100) {
+                    if (distance <= 100) {
 
-                    for (Entity entity : player.getNearbyEntities(f, f, f)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorstand = (ArmorStand) entity;
-                            if (armorstand.isCustomNameVisible() == true) {
-                                armorstand.setCustomNameVisible(false);
+                        for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
+                            if (entity instanceof ArmorStand) {
+                                ArmorStand armorstand = (ArmorStand) entity;
+
+                                if (armorstand.isCustomNameVisible()) {
+                                    armorstand.setCustomNameVisible(false);
+                                }
+
+                                String message = AdvancedArmorStandsMain.getInstance().getMessageString("modification", player.getLocale()).replace("%s", distance.toString());
+                                player.sendMessage(org.bukkit.ChatColor.GOLD + message);
+
                             }
                         }
+
+                    } else {
+
+                        String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
+                        player.sendMessage(org.bukkit.ChatColor.RED + message);
+
                     }
-                }
-                else {
-                    player.sendMessage("ยง6[AA] Please do not use higher values than 100 for the range!");
-                }
+
+
+            } else {
+
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                player.sendMessage(org.bukkit.ChatColor.RED + message + org.bukkit.ChatColor.AQUA + " /aa hidenames <range>");
+
             }
-            else {
-                player.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use /aa hidenames <range>");
-            }
-        }
-        else {
-            player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to use this command!");
+
+        } else {
+
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(org.bukkit.ChatColor.RED + message);
+
         }
 
         return true;
+
     }
 
 }

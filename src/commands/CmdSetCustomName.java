@@ -1,5 +1,6 @@
 package commands;
 
+import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
@@ -14,34 +15,41 @@ public class CmdSetCustomName implements CommandInterface {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
-        if (p.hasPermission("aa.names")) {
+        if (player.hasPermission("aa.edit")) {
 
             if (args.length <= 20) {
 
-                String customname = ChatColor.translateAlternateColorCodes('&', String.join(" ", args).replaceFirst("name ", ""));
+                String customName = ChatColor.translateAlternateColorCodes('&', String.join(" ", args).replaceFirst("name ", ""));
 
-                for (Entity entity : p.getNearbyEntities(1, 1, 1)) {
+                for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
                     if (entity instanceof ArmorStand) {
                         ArmorStand armorstand = (ArmorStand) entity;
-                        armorstand.setCustomName(customname);
+                        armorstand.setCustomName(customName);
                         armorstand.setCustomNameVisible(true);
                     }
                 }
 
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("modification", player.getLocale()).replace("%s", "1");
+                player.sendMessage(org.bukkit.ChatColor.GOLD + message);
+
+            } else {
+
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("name_error_01", player.getLocale());
+                player.sendMessage(org.bukkit.ChatColor.RED + message);
+
             }
 
-            else {
-                p.sendMessage("§c[AA] Your name is too long!");
-            }
+        } else {
 
-        }
-        else {
-            p.sendMessage("§c[AA] Sorry, but you have no permission to use this command!");
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(org.bukkit.ChatColor.RED + message);
+
         }
 
         return true;
+
     }
 
 }

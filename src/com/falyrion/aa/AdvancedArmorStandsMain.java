@@ -3,11 +3,18 @@ package com.falyrion.aa;
 import commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
+import org.bukkit.block.data.type.Switch;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.IOException;
 
 public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
@@ -18,7 +25,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     private GUI gui;
 
-    public String aaVersion = "v.1.17.1.0";
+    public String aaVersion = "v.1.17.2.0";
     public String apiVersion = "1.17+";
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -42,7 +49,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         commandHandler.registerCommand("lap", new CmdSetLeftArmPose());
         commandHandler.registerCommand("rlp", new CmdSetRightLegPose());
         commandHandler.registerCommand("llp", new CmdSetLeftLegPose());
-        commandHandler.registerCommand("help", new CmdHelp());
+        commandHandler.registerCommand("help", new CmdInfo());
         commandHandler.registerCommand("info", new CmdInfo());
         commandHandler.registerCommand("name", new CmdSetCustomName());
         commandHandler.registerCommand("hidenames", new CmdRemoveCustomName());
@@ -63,6 +70,74 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
     public void showMenu(Player player, int menuID) {
         gui.openMenu(player, menuID);
     }
+
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // Language file
+
+    private File languageConfigFile;
+    private FileConfiguration languageConfig;
+
+    /**
+     * Reads language config file on server start
+     */
+    private void createLanguageConfig() {
+
+        saveResource("resources/lang.yml", false);
+
+        languageConfigFile = new File(getDataFolder(), "resources/lang.yml");
+        languageConfig = new YamlConfiguration();
+        try {
+            languageConfig.load(languageConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            System.out.println("[AdvancedArmorStands] Could not load language file");
+            System.out.println("[AdvancedArmorStands] Please delete the folder AdvancedArmorStands inside your plugins folder and restart or reload the server.");
+            e.printStackTrace();
+        }
+
+    }
+
+    public FileConfiguration getLanguageConfig() {
+        return this.languageConfig;
+    }
+
+    /**
+     * Reads individual message string from lang.yml-file and returns it
+     *
+     * @param messagePath: String, Path to message in the lang.yml-file
+     * @param language: String, Language to look up
+     * @return: String, Message
+     */
+    public String getMessageString(String messagePath, String language) {
+
+        // Check if language path exist
+        if (getLanguageConfig().getString(language) != null) {
+
+            // If language path points to another language, use that instead
+            if (getLanguageConfig().getString(language).length() == 5) {
+                language = getLanguageConfig().getString(language);
+            }
+
+            // Get message translated to wanted language
+            String message = getLanguageConfig().getString(language + "." + messagePath);
+
+            // Check if message was translated successfully, else get default path (english)
+
+            if (message == null) {
+                message = getLanguageConfig().getString("en_us." + messagePath);
+
+                // TODO: If message still null, languages.file might have been deleted for any reason. Recreate it.
+            }
+
+            return message;
+
+        } else {
+            // If language path does not exist, use default language (english)
+            String message = getLanguageConfig().getString("en_us." + messagePath);
+            return message;
+        }
+
+    }
+
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Sounds
@@ -99,6 +174,9 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         instance = this;
 
         this.registerCommands();
+
+        // Initiate language files
+        createLanguageConfig();
 
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClickHandler(), this);
 

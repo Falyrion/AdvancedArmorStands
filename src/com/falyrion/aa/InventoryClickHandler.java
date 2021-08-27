@@ -17,6 +17,9 @@ import org.bukkit.util.EulerAngle;
 
 public class InventoryClickHandler implements Listener {
 
+    /**
+     * Event listener to handle click events
+     */
     @EventHandler
     public void onInventoryClick (InventoryClickEvent clickEvent) {
 
@@ -196,11 +199,13 @@ public class InventoryClickHandler implements Listener {
     }
 
 
+    /**
+     * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
+     *
+     * @param itemName: String, The item that was clicked on
+     * @param player: Player, The player who clicked
+     */
     private void handleEventMainMenu(String itemName, Player player) {
-
-        /**
-         * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
-         */
 
         switch(itemName) {
             case "§e§lBasic Settings":
@@ -235,10 +240,19 @@ public class InventoryClickHandler implements Listener {
 
             case "§e§lDocumentation":
                 player.closeInventory();
-                TextComponent message10 = new TextComponent(">> [Advanced ArmorStands] Click on this message to open a link to the spigot website for a full documentation of this plugin!");
-                message10.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
-                message10.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/advanced-armor-stands.38513/"));
-                player.spigot().sendMessage(message10);
+
+                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("documentation", player.getLocale()));
+
+                TextComponent textComponentWebsite = new TextComponent(">> Spigot website");
+                textComponentWebsite.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+                textComponentWebsite.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/advanced-armor-stands.38513/"));
+                player.spigot().sendMessage(textComponentWebsite);
+
+                TextComponent textComponentGithub = new TextComponent(">> Github");
+                textComponentGithub.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+                textComponentGithub.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/Falyrion/AdvancedArmorStands/blob/main/README.md"));
+                player.spigot().sendMessage(textComponentGithub);
+
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 break;
 
@@ -250,11 +264,13 @@ public class InventoryClickHandler implements Listener {
     }
 
 
+    /**
+     * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
+     *
+     * @param itemName: String, The item that was clicked on
+     * @param player: Player, The player who clicked
+     */
     private void handleEventBasicMenu(String itemName, Player player) {
-
-        /**
-         * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
-         */
 
         switch(itemName) {
             case "§e§lArms":
@@ -262,18 +278,15 @@ public class InventoryClickHandler implements Listener {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
                         if (entity instanceof ArmorStand) {
                             ArmorStand armorstand = (ArmorStand) entity;
-                            if(armorstand.hasArms()) {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand has already arms!");
-                            }
-                            else {
+                            if(!armorstand.hasArms()) {
                                 armorstand.setArms(true);
-                                player.sendMessage(ChatColor.GOLD + "[AA] You gave a nearby armor stand arms!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -285,16 +298,13 @@ public class InventoryClickHandler implements Listener {
                             ArmorStand armorstand = (ArmorStand) entity;
                             if(armorstand.hasBasePlate()) {
                                 armorstand.setBasePlate(false);
-                                player.sendMessage(ChatColor.GOLD + "[AA] You made the baseplate of a nearby armor stand invisible!");
-                            }
-                            else {
-                                player.sendMessage(ChatColor.RED + "[AA] The baseplate of a nearby armor stand is already invisible!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -304,18 +314,15 @@ public class InventoryClickHandler implements Listener {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
                         if (entity instanceof ArmorStand) {
                             ArmorStand armorstand = (ArmorStand) entity;
-                            if(armorstand.hasBasePlate()) {
-                                player.sendMessage(ChatColor.RED + "[AA] The baseplate of a nearby armor stand is already visible!");
-                            }
-                            else {
+                            if(!armorstand.hasBasePlate()) {
                                 armorstand.setBasePlate(true);
-                                player.sendMessage(ChatColor.GOLD + "[AA] You made the baseplate of a nearby armor stand visible!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -327,16 +334,14 @@ public class InventoryClickHandler implements Listener {
                             ArmorStand armorstand = (ArmorStand) entity;
                             if(armorstand.hasGravity()) {
                                 armorstand.setGravity(false);
-                                player.sendMessage(ChatColor.GOLD + "[AA] Nearby armor stands are not longer affected by gravity");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
-                            else {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand has already no gravity!");
-                            }
+
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -346,18 +351,15 @@ public class InventoryClickHandler implements Listener {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
                         if (entity instanceof ArmorStand) {
                             ArmorStand armorstand = (ArmorStand) entity;
-                            if(armorstand.hasGravity()) {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand is already affected by gravity!");
-                            }
-                            else {
+                            if(!armorstand.hasGravity()) {
                                 armorstand.setGravity(true);
-                                player.sendMessage(ChatColor.GOLD + "[AA] Nearby armor stands are now not longer affected by gravity!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -369,16 +371,13 @@ public class InventoryClickHandler implements Listener {
                             ArmorStand armorstand = (ArmorStand) entity;
                             if(armorstand.isVisible()) {
                                 armorstand.setVisible(false);
-                                player.sendMessage(ChatColor.GOLD + "[AA] A nearby armor stand is now invisible");
-                            }
-                            else {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand is already invisible!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -388,18 +387,15 @@ public class InventoryClickHandler implements Listener {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
                         if (entity instanceof ArmorStand) {
                             ArmorStand armorstand = (ArmorStand) entity;
-                            if(armorstand.isVisible()) {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand is already visible!");
-                            }
-                            else {
+                            if(!armorstand.isVisible()) {
                                 armorstand.setVisible(true);
-                                player.sendMessage(ChatColor.GOLD + "[AA] A nearby armor stand is now visible!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -409,18 +405,15 @@ public class InventoryClickHandler implements Listener {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
                         if (entity instanceof ArmorStand) {
                             ArmorStand armorstand = (ArmorStand) entity;
-                            if(armorstand.isSmall()) {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand is already small!");
-                            }
-                            else {
+                            if(!armorstand.isSmall()) {
                                 armorstand.setSmall(true);
-                                player.sendMessage(ChatColor.GOLD + "[AA] A nearby armor stand is now small!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -432,16 +425,13 @@ public class InventoryClickHandler implements Listener {
                             ArmorStand armorstand = (ArmorStand) entity;
                             if(armorstand.isSmall()) {
                                 armorstand.setSmall(false);
-                                player.sendMessage(ChatColor.GOLD + "[AA] A nearby armor stand is now normal size!");
-                            }
-                            else {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand is already normal size!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -453,27 +443,24 @@ public class InventoryClickHandler implements Listener {
                             if(entity.isCustomNameVisible()){
                                 ArmorStand armorstand = (ArmorStand) entity;
                                 armorstand.setCustomNameVisible(false);
-                                player.sendMessage(ChatColor.GOLD + "[AA] The names of nearby armor stands are now invisble!");
-                            }
-                            else{
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand has no name to remove!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                } else{
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
-                        AdvancedArmorStandsMain.getInstance().playSoundBass(player);
+                } else {
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
+                    AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
 
             case "§e§lName Help":
                 if (player.hasPermission("aa.names")) {
-                    player.sendMessage(ChatColor.GOLD + "==============[AA] Name-Help==============");
+                    player.sendMessage(ChatColor.GOLD + "============== [AA] Name-Help ==============");
                     player.sendMessage("§fUse §b/aa name <text> §fto give your armor stand a custom name! This command affects every armor stand in 1 block range around you!");
                     player.sendMessage("§fWrite '&' and a number in front of your text to give it a specific color.");
                     player.sendMessage("  ");
-                    player.sendMessage("§fAvailable colors: §00 §11 §22 §33 §44 §55 §66 §77 §88 §99 §aa §bb §cc §dd §ee §ff");
+                    player.sendMessage("§fColors: §00 §11 §22 §33 §44 §55 §66 §77 §88 §99 §aa §bb §cc §dd §ee §ff");
                     player.sendMessage("l §lBold");
                     player.sendMessage("m §mStrikethrough");
                     player.sendMessage("n §nUnderline");
@@ -481,12 +468,12 @@ public class InventoryClickHandler implements Listener {
                     player.sendMessage("k Obfuscated §kObfuscated");
                     player.sendMessage("    ");
                     player.sendMessage("Example: '/aa name &3Cool &6&llooking &fNames' will create '§3Cool §6§llooking §fNames' ");
-                    player.sendMessage(ChatColor.GOLD + "==========================================");
+                    player.sendMessage(ChatColor.GOLD + "============================================");
 
                     player.closeInventory();
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -494,18 +481,16 @@ public class InventoryClickHandler implements Listener {
                 if (player.hasPermission("aa.edit")) {
                     for(Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)) {
                         if(entity instanceof ArmorStand) {
-                            if(entity.isGlowing()) {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand is already glowing!");
-                            } else {
+                            if(!entity.isGlowing()) {
                                 ArmorStand armorstand = (ArmorStand) entity;
                                 armorstand.setGlowing(true);
-                                player.sendMessage(ChatColor.GOLD + "[AA] Added glow effect to a nearby armor stand!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else{
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -517,15 +502,13 @@ public class InventoryClickHandler implements Listener {
                             if(entity.isGlowing()) {
                                 ArmorStand armorstand = (ArmorStand) entity;
                                 armorstand.setGlowing(false);
-                                player.sendMessage(ChatColor.GOLD + "[AA] Removed glow effect from a nearby armor stand!");
-                            } else {
-                                player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand has no glow effect to remove!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else{
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -537,17 +520,16 @@ public class InventoryClickHandler implements Listener {
                             ArmorStand armorstand = (ArmorStand) entity;
                             if (armorstand.isInvulnerable()) {
                                 armorstand.setInvulnerable(false);
-                                player.sendMessage(ChatColor.GOLD + "[AA] A nearby armor stand is not longer invulnerable!");
-                            }
-                            else{
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
+                            } else{
                                 armorstand.setInvulnerable(true);
-                                player.sendMessage(ChatColor.GOLD + "[AA] You made nearby armor stands invulnerable!");
+                                player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                 } else {
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
                 break;
@@ -558,7 +540,7 @@ public class InventoryClickHandler implements Listener {
                 AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 break;
 
-            case "§e§lBack to Main Menu":
+            case "§e§lBack":
                 player.closeInventory();
                 AdvancedArmorStandsMain.getInstance().showMenu(player, 1);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
@@ -567,11 +549,13 @@ public class InventoryClickHandler implements Listener {
     }
 
 
+    /**
+     * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
+     *
+     * @param itemName: String, The item that was clicked on
+     * @param player: Player, The player who clicked
+     */
     private void handleEventBodyPartMenu(String itemName, Player player) {
-
-        /**
-         * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
-         */
 
         switch (itemName) {
             case "§e§lHead Pose":
@@ -599,6 +583,12 @@ public class InventoryClickHandler implements Listener {
     }
 
 
+    /**
+     * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
+     *
+     * @param itemName: String, The item that was clicked on
+     * @param player: Player, The player who clicked
+     */
     private void handleEventMovementMenu(String itemName, Player player, float distance) {
 
         /**
@@ -659,13 +649,12 @@ public class InventoryClickHandler implements Listener {
 
                             armorStand.teleport(newLocation);
 
-                            player.sendMessage(ChatColor.GOLD + "[AA] You moved a nearby armor stand forward!");
                             AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                         }
                     }
                 } else {
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -685,13 +674,12 @@ public class InventoryClickHandler implements Listener {
 
                             armorStand.teleport(newLocation);
 
-                            player.sendMessage(ChatColor.GOLD + "[AA] You moved a nearby armor stand backwards!");
                             AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                         }
                     }
                 } else {
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -711,13 +699,12 @@ public class InventoryClickHandler implements Listener {
 
                             armorStand.teleport(newLocation);
 
-                            player.sendMessage(ChatColor.GOLD + "[AA] You moved a nearby armor stand to the right!");
                             AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                         }
                     }
                 } else {
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -737,13 +724,12 @@ public class InventoryClickHandler implements Listener {
 
                             armorStand.teleport(newLocation);
 
-                            player.sendMessage(ChatColor.GOLD + "[AA] You moved a nearby armor stand to the left!");
                             AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                         }
                     }
                 } else {
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -766,13 +752,12 @@ public class InventoryClickHandler implements Listener {
 
                             armorStand.teleport(newLocation);
 
-                            player.sendMessage(ChatColor.GOLD + "[AA] You moved a nearby armor stand up!");
                             AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                         }
                     }
                 } else {
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -792,13 +777,12 @@ public class InventoryClickHandler implements Listener {
 
                             armorStand.teleport(newLocation);
 
-                            player.sendMessage(ChatColor.GOLD + "[AA] You moved a nearby armor stand down!");
                             AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                         }
                     }
                 } else {
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -821,13 +805,12 @@ public class InventoryClickHandler implements Listener {
 
                             armorStand.teleport(newLocation);
 
-                            player.sendMessage(ChatColor.GOLD + "[AA] You rotated a nearby armor stand to the left!");
                             AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                         }
                     }
                 } else {
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -847,13 +830,12 @@ public class InventoryClickHandler implements Listener {
 
                             armorStand.teleport(newLocation);
 
-                            player.sendMessage(ChatColor.GOLD + "[AA] You rotated a nearby armor stand to the right!");
                             AdvancedArmorStandsMain.getInstance().playSoundClick(player);
                         }
                     }
                 } else {
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                    player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+                    player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                 }
                 break;
 
@@ -862,16 +844,16 @@ public class InventoryClickHandler implements Listener {
     }
 
 
+    /**
+     * Helper function for handlePresetPoseMenu(). Modifies an armor stands body parts near a player based on given input
+     * angles for all body parts.
+     */
     private void setArmorStandPose(Player player, double rightArmRoll, double rightArmYaw, double rightArmPitch,
                                    double leftArmRoll, double leftArmYaw, double leftArmPitch,
                                    double rightLegRoll, double rightLegYaw, double rightLegPitch,
                                    double leftLegRoll, double LeftLegYaw, double llp_yaw,
                                    double headRoll, double headYaw, double headPitch,
                                    double bodyRoll, double bodyYaw, double bodyPitch) {
-
-        /**
-         * Helper function for handleEventPresetPoseMenu()
-         */
 
         for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
             if (entity instanceof ArmorStand) {
@@ -934,11 +916,13 @@ public class InventoryClickHandler implements Listener {
 
 
 
+    /**
+     * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
+     *
+     * @param itemName: String, The item that was clicked on
+     * @param player: Player, The player who clicked
+     */
     private void handleEventPresetPoseMenu(String itemName, Player player) {
-
-        /**
-         * Runs an action based on a clicked item. Called by InventoryClickEvent-EventHandler.
-         */
 
         switch (itemName) {
             case "§e§lDefault 1":

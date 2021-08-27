@@ -1,5 +1,6 @@
 package commands;
 
+import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -33,63 +34,75 @@ public class CmdReciveCustomHead implements CommandInterface {
             if (args.length == 3) {
 
                 String playerName = (args[1]);
-                int i = Integer.parseInt(args[2]);
+                int headAmount = Integer.parseInt(args[2]);
 
-                if (i > 64) {
+                if (headAmount > 64) {
+                    headAmount = 64;
+                }
 
-                    player.sendMessage(ChatColor.RED +"[AA] You can not get more than 64 heads at once!");
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("head_loading", player.getLocale());
+                player.sendMessage(ChatColor.GOLD + message);
 
-                } else {
+                // Get texture value
+                String textureValue = getTexture(playerName);
 
-                    player.sendMessage(ChatColor.GOLD + "[AA] Generating head... This may take some moments!");
+                // Check for sucess
+                if (textureValue == null) {
+                    String errorMessage = AdvancedArmorStandsMain.getInstance().getMessageString("head_error_01", player.getLocale());
+                    player.sendMessage(ChatColor.RED + errorMessage);
+                }
 
-                    // Get texture value
-                    String textureValue = getTexture(playerName);
+                // Create Itemstack Playerhead
+                final ItemStack myHead = new ItemStack(Material.PLAYER_HEAD, headAmount);
 
-                    // Create Itemstack Playerhead
-                    final ItemStack myHead = new ItemStack(Material.PLAYER_HEAD, i);
+                // Get Item Meta
+                SkullMeta headMeta = (SkullMeta) myHead.getItemMeta();
 
-                    // Get Item Meta
-                    SkullMeta headMeta = (SkullMeta) myHead.getItemMeta();
+                assert headMeta != null;
 
-                    assert headMeta != null;
+                // Set Game Profile
+                GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+                profile.getProperties().put("textures", new Property("textures", textureValue));
 
-                    // Set Game Profile
-                    GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-                    profile.getProperties().put("textures", new Property("textures", textureValue));
+                try {
+                    Field profileField = headMeta.getClass().getDeclaredField("profile");
+                    profileField.setAccessible(true);
+                    profileField.set(headMeta, profile);
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
 
-                    try {
-                        Field profileField = headMeta.getClass().getDeclaredField("profile");
-                        profileField.setAccessible(true);
-                        profileField.set(headMeta, profile);
-                    } catch (NoSuchFieldException | IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+                // Set Display Name
+                headMeta.setDisplayName(playerName);
 
-                    // Set Display Name
-                    headMeta.setDisplayName(playerName);
+                // Set Itemmeta to head
+                myHead.setItemMeta(headMeta);
 
-                    // Set Itemmeta to head
-                    myHead.setItemMeta(headMeta);
+                // Add head to inventory
+                player.getInventory().addItem(myHead);
 
-                    // Add head to inventory
-                    player.getInventory().addItem(myHead);
+                String sucessMessage = AdvancedArmorStandsMain.getInstance().getMessageString("head_success", player.getLocale()).replace("%s", playerName + " * " + headAmount);
+                player.sendMessage(ChatColor.GOLD + sucessMessage);
 
-                    player.sendMessage(ChatColor.GOLD + "[AA] Added head of " + ChatColor.GOLD + playerName + " * " + i + ChatColor.GOLD + " to your inventory!");
-
-                    for(Player onlinePlayers : Bukkit.getOnlinePlayers()){
-                        if(onlinePlayers.hasPermission("aa.adminbroadcast")){
-                            onlinePlayers.sendMessage("§7§o[Advanced ArmorStands: Given head of " + playerName + " * " + i + " to " + player.getName() + "]");
-                        }
+                for(Player onlinePlayers : Bukkit.getOnlinePlayers()){
+                    if(onlinePlayers.hasPermission("aa.adminbroadcast")){
+                        onlinePlayers.sendMessage("§7§o[Advanced ArmorStands: Given head of " + playerName + " * " + headAmount + " to " + player.getName() + "]");
                     }
                 }
 
+
             } else {
-                player.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use " + ChatColor.AQUA + "/aa head <player_name> <amount>");
+
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                player.sendMessage(ChatColor.RED + message + ChatColor.AQUA + " /aa head <playername> <amount>");
+
             }
 
         } else {
-            player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to use this command!");
+
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(ChatColor.RED + message);
+
         }
 
         return true;
@@ -113,18 +126,16 @@ public class CmdReciveCustomHead implements CommandInterface {
             return texture;
 
         } catch (IOException | IllegalStateException e) {
+
             /*
             System.err.println("[Advanced Armorstands] Error report");
             e.printStackTrace();
             System.err.println("[Advanced Armorstands] Could not get skin data for player head from session servers! Try later again or check if the players name was spelled correctly.");
             */
+
             return null;
         }
     }
-
-
-
-
 
 
 

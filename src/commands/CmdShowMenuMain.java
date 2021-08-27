@@ -15,7 +15,10 @@ public class CmdShowMenuMain implements AdvancedArmorStandsMain.CommandInterface
         if (player.hasPermission("aa.edit")) {
             AdvancedArmorStandsMain.getInstance().showMenu(player, 1);
         } else {
-            player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to perform this command!");
+
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(ChatColor.RED + message);
+
         }
 
         return true;

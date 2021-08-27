@@ -1,5 +1,6 @@
 package commands;
 
+import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -24,56 +25,64 @@ public class CmdGetArmorstandData implements CommandInterface {
                     if (entity instanceof ArmorStand) {
                         ArmorStand armorstand = (ArmorStand) entity;
 
-                        double x5 = armorstand.getHeadPose().getX(); x5 = Math.toDegrees(x5); x5 = Math.rint(x5);
-                        double y5 = armorstand.getHeadPose().getY(); y5 = Math.toDegrees(y5); y5 = Math.rint(y5);
-                        double z5 = armorstand.getHeadPose().getZ(); z5 = Math.toDegrees(z5); z5 = Math.rint(z5);
+                        double roll_hp = armorstand.getHeadPose().getX(); roll_hp = Math.toDegrees(roll_hp); roll_hp = Math.rint(roll_hp);
+                        double yaw_hp = armorstand.getHeadPose().getY(); yaw_hp = Math.toDegrees(yaw_hp); yaw_hp = Math.rint(yaw_hp);
+                        double pitch_hp = armorstand.getHeadPose().getZ(); pitch_hp = Math.toDegrees(pitch_hp); pitch_hp = Math.rint(pitch_hp);
 
-                        double x6 = armorstand.getBodyPose().getX(); x6 = Math.toDegrees(x6); x6 = Math.rint(x6);
-                        double y6 = armorstand.getBodyPose().getY(); y6 = Math.toDegrees(y6); y6 = Math.rint(y6);
-                        double z6 = armorstand.getBodyPose().getZ(); z6 = Math.toDegrees(z6); z6 = Math.rint(z6);
+                        double roll_bp = armorstand.getBodyPose().getX(); roll_bp = Math.toDegrees(roll_bp); roll_bp = Math.rint(roll_bp);
+                        double yaw_bp = armorstand.getBodyPose().getY(); yaw_bp = Math.toDegrees(yaw_bp); yaw_bp = Math.rint(yaw_bp);
+                        double pitch_bp = armorstand.getBodyPose().getZ(); pitch_bp = Math.toDegrees(pitch_bp); pitch_bp = Math.rint(pitch_bp);
 
-                        double x = armorstand.getRightArmPose().getX(); x = Math.toDegrees(x); x = Math.rint(x);
-                        double y = armorstand.getRightArmPose().getY(); y = Math.toDegrees(y); y = Math.rint(y);
-                        double z = armorstand.getRightArmPose().getZ(); z = Math.toDegrees(z); z = Math.rint(z);
+                        double roll_rap = armorstand.getRightArmPose().getX(); roll_rap = Math.toDegrees(roll_rap); roll_rap = Math.rint(roll_rap);
+                        double yaw_rap = armorstand.getRightArmPose().getY(); yaw_rap = Math.toDegrees(yaw_rap); yaw_rap = Math.rint(yaw_rap);
+                        double pitch_rap = armorstand.getRightArmPose().getZ(); pitch_rap = Math.toDegrees(pitch_rap); pitch_rap = Math.rint(pitch_rap);
 
-                        double x2 = armorstand.getLeftArmPose().getX(); x2 = Math.toDegrees(x2); x2 = Math.rint(x2);
-                        double y2 = armorstand.getLeftArmPose().getY(); y2 = Math.toDegrees(y2); y2 = Math.rint(y2);
-                        double z2 = armorstand.getLeftArmPose().getZ(); z2 = Math.toDegrees(z2); z2 = Math.rint(z2);
+                        double roll_lap = armorstand.getLeftArmPose().getX(); roll_lap = Math.toDegrees(roll_lap); roll_lap = Math.rint(roll_lap);
+                        double yaw_lap = armorstand.getLeftArmPose().getY(); yaw_lap = Math.toDegrees(yaw_lap); yaw_lap = Math.rint(yaw_lap);
+                        double pitch_lap = armorstand.getLeftArmPose().getZ(); pitch_lap = Math.toDegrees(pitch_lap); pitch_lap = Math.rint(pitch_lap);
 
-                        double x3 = armorstand.getRightLegPose().getX(); x3 = Math.toDegrees(x3); x3 = Math.rint(x3);
-                        double y3 = armorstand.getRightLegPose().getY(); y3 = Math.toDegrees(y3); y3 = Math.rint(y3);
-                        double z3 = armorstand.getRightLegPose().getZ(); z3 = Math.toDegrees(z3); z3 = Math.rint(z3);
+                        double roll_rlp = armorstand.getRightLegPose().getX(); roll_rlp = Math.toDegrees(roll_rlp); roll_rlp = Math.rint(roll_rlp);
+                        double yaw_rlp = armorstand.getRightLegPose().getY(); yaw_rlp = Math.toDegrees(yaw_rlp); yaw_rlp = Math.rint(yaw_rlp);
+                        double pitch_rlp = armorstand.getRightLegPose().getZ(); pitch_rlp = Math.toDegrees(pitch_rlp); pitch_rlp = Math.rint(pitch_rlp);
 
-                        double x4 = armorstand.getLeftLegPose().getX(); x4 = Math.toDegrees(x4); x4 = Math.rint(x4);
-                        double y4 = armorstand.getLeftLegPose().getY(); y4 = Math.toDegrees(y4); y4 = Math.rint(y4);
-                        double z4 = armorstand.getLeftLegPose().getZ(); z4 = Math.toDegrees(z4); z4 = Math.rint(z4);
+                        double roll_llp = armorstand.getLeftLegPose().getX(); roll_llp = Math.toDegrees(roll_llp); roll_llp = Math.rint(roll_llp);
+                        double yaw_llp = armorstand.getLeftLegPose().getY(); yaw_llp = Math.toDegrees(yaw_llp); yaw_llp = Math.rint(yaw_llp);
+                        double pitch_llp = armorstand.getLeftLegPose().getZ(); pitch_llp = Math.toDegrees(pitch_llp); pitch_llp = Math.rint(pitch_llp);
 
-                        float f = (float) armorstand.getLocation().getX();
-                        float f2 = (float) armorstand.getLocation().getY();
-                        float f3 = (float) armorstand.getLocation().getZ();
+                        float locationX = (float) armorstand.getLocation().getX();
+                        float locationY = (float) armorstand.getLocation().getY();
+                        float locationZ = (float) armorstand.getLocation().getZ();
 
                         player.sendMessage(ChatColor.GOLD + "---------------------------------------------");
-                        player.sendMessage(ChatColor.GOLD + "[AA] A nearby armor stand has the following stats:");
-                        player.sendMessage(ChatColor.GOLD + "Head: " + ChatColor.AQUA + x5 + "/" + y5 + "/" + z5 + ChatColor.GOLD + "; Body: " + ChatColor.AQUA + x6 + "/" + y6 + "/" + z6);
-                        player.sendMessage(ChatColor.GOLD + "RightArm: " + ChatColor.AQUA + x + "/" + y + "/" + z + ChatColor.GOLD + "; LeftArm: " + ChatColor.AQUA + x2 + "/" + y2 + "/" + z2);
-                        player.sendMessage(ChatColor.GOLD + "RightLeg: " + ChatColor.AQUA + x3 + "/" + y3 + "/" + z3 + ChatColor.GOLD + "; LeftLeg: " + ChatColor.AQUA + x4 + "/" + y4 + "/" + z4);
-                        player.sendMessage(ChatColor.GOLD + "Coordinates: " + ChatColor.AQUA + " x: " + f + "/ y: " + f2 + "/ z: " + f3);
+                        String messageData = AdvancedArmorStandsMain.getInstance().getMessageString("data_cmd", player.getLocale());
+                        player.sendMessage(ChatColor.GOLD + messageData);
+                        player.sendMessage(ChatColor.GOLD + "Head: " + ChatColor.AQUA + roll_hp + " / " + yaw_hp + " / " + pitch_hp);
+                        player.sendMessage(ChatColor.GOLD + "Body: " + ChatColor.AQUA + roll_bp + " / " + yaw_bp + " / " + pitch_bp);
+                        player.sendMessage(ChatColor.GOLD + "RAP: " + ChatColor.AQUA + roll_rap + " / " + yaw_rap + " / " + pitch_rap);
+                        player.sendMessage(ChatColor.GOLD + "LAP: " + ChatColor.AQUA + roll_lap + " / " + yaw_lap + " / " + pitch_lap);
+                        player.sendMessage(ChatColor.GOLD + "RLP: " + ChatColor.AQUA + roll_rlp + " / " + yaw_rlp + " / " + pitch_rlp);
+                        player.sendMessage(ChatColor.GOLD + "LLP: " + ChatColor.AQUA + roll_llp + " / " + yaw_llp + " / " + pitch_llp);
+                        player.sendMessage(ChatColor.GOLD + "Coordinates: " + ChatColor.AQUA + " x: " + locationX + " / y: " + locationY + " / z: " + locationZ);
                         player.sendMessage(ChatColor.GOLD + "---------------------------------------------");
                     }
                 }
 
+            } else {
+
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                player.sendMessage(ChatColor.RED + message + ChatColor.AQUA + " /aa stats");
+
             }
 
-            else {
-                player.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use §b/aa stats§c!");
-            }
+        } else {
 
-        }
-        else {
-            player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to use this command!");
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(ChatColor.RED + message);
+
         }
 
         return true;
+
     }
 
 }

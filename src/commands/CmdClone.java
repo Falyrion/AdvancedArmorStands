@@ -2,6 +2,7 @@ package commands;
 
 import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,17 +21,17 @@ public class CmdClone implements CommandInterface {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
-        if(p.hasPermission("aa.clone")){
+        if(player.hasPermission("aa.clone")){
 
             if(args.length == 4){
 
-                Float i = Float.parseFloat(args[1]);
-                Float i2 = Float.parseFloat(args[2]);
-                Float i3 = Float.parseFloat(args[3]);
+                Float coordsX = Float.parseFloat(args[1]);
+                Float coordsY = Float.parseFloat(args[2]);
+                Float coordsZ = Float.parseFloat(args[3]);
 
-                for(Entity entity : p.getNearbyEntities(0.5, 0.5, 0.5)){
+                for(Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)){
                     if(entity instanceof ArmorStand){
                         ArmorStand armorstand = (ArmorStand) entity;
 
@@ -45,17 +46,17 @@ public class CmdClone implements CommandInterface {
                         EulerAngle ea5 = armorstand.getRightLegPose();
                         EulerAngle ea6 = armorstand.getLeftLegPose();
 
-                        Location loc = new Location(p.getWorld(), i + 0.5, i2, i3 + 0.5);
+                        Location loc = new Location(player.getWorld(), coordsX + 0.5, coordsY, coordsZ + 0.5);
                         Float ayaw = armorstand.getLocation().getYaw();
                         loc.setYaw(ayaw);
 
                         // Check for gamemode of the player
 
-                        if(p.getGameMode() == GameMode.SURVIVAL){
-                            if(p.getInventory().containsAtLeast(new ItemStack(Material.ARMOR_STAND), 1)){
-                                p.getInventory().removeItem(new ItemStack(Material.ARMOR_STAND, 1));
+                        if(player.getGameMode() == GameMode.SURVIVAL){
+                            if(player.getInventory().containsAtLeast(new ItemStack(Material.ARMOR_STAND), 1)){
+                                player.getInventory().removeItem(new ItemStack(Material.ARMOR_STAND, 1));
 
-                                ArmorStand armorstand2 = (ArmorStand) p.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
+                                ArmorStand armorstand2 = (ArmorStand) player.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
 
                                 armorstand2.setArms(arms);
                                 armorstand2.setBasePlate(base);
@@ -68,15 +69,21 @@ public class CmdClone implements CommandInterface {
                                 armorstand2.setRightLegPose(ea5);
                                 armorstand2.setLeftLegPose(ea6);
 
-                                p.sendMessage("§6[AA] You duplicated a nearby armor stand to the location: §b" + i + " " + i2 + " " + i3 + "§6. Removed 1 armor stand from your inventory.");
+                                String message = AdvancedArmorStandsMain.getInstance().getMessageString("duplicate_success_survival", player.getLocale());
+                                player.sendMessage(ChatColor.GOLD + message + ChatColor.AQUA + " " + coordsX + " " + coordsY + " " + coordsZ);
 
-                                AdvancedArmorStandsMain.getInstance().playSoundTeleport(p);
+                                AdvancedArmorStandsMain.getInstance().playSoundTeleport(player);
+
+                            } else {
+
+                                String message = AdvancedArmorStandsMain.getInstance().getMessageString("duplicate_error_01", player.getLocale());
+                                player.sendMessage(ChatColor.RED + message);
+
                             }
-                            else p.sendMessage("§c[AA] You need at least 1 armor stand in your inventory to duplicate a existing one!");
                         }
 
-                        if(p.getGameMode() == GameMode.CREATIVE){
-                            ArmorStand armorstand2 = (ArmorStand) p.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
+                        if(player.getGameMode() == GameMode.CREATIVE){
+                            ArmorStand armorstand2 = (ArmorStand) player.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
 
                             armorstand2.setArms(arms);
                             armorstand2.setBasePlate(base);
@@ -95,12 +102,13 @@ public class CmdClone implements CommandInterface {
                             armorstand2.setBoots(armorstand.getBoots());
                             armorstand2.setItemInHand(armorstand.getItemInHand());
 
-                            p.sendMessage("§6[AA] You duplicated a nearby armor stand to the location: §b" + i + " " + i2 + " " + i3 + "§6!");
+                            String message = AdvancedArmorStandsMain.getInstance().getMessageString("duplicate_success_creative", player.getLocale());
+                            player.sendMessage(ChatColor.GOLD + message + ChatColor.AQUA + " " + coordsX + " " + coordsY + " " + coordsZ);
 
-                            AdvancedArmorStandsMain.getInstance().playSoundTeleport(p);
+                            AdvancedArmorStandsMain.getInstance().playSoundTeleport(player);
                         }
-                        if(!(p.getGameMode() == GameMode.SURVIVAL) && !(p.getGameMode() == GameMode.CREATIVE)){
-                            p.sendMessage("§c[AA] You need to be in survival or creative mode to duplicate an armor stand!");
+                        if(!(player.getGameMode() == GameMode.SURVIVAL) && !(player.getGameMode() == GameMode.CREATIVE)){
+                            player.sendMessage( ChatColor.RED + "[AA] You need to be in survival or creative mode to duplicate an armor stand!");
                         }
                     }
                 }
@@ -109,12 +117,18 @@ public class CmdClone implements CommandInterface {
             }
 
             else{
-                p.sendMessage("§c[AA] This command was not used correctly! Please use §b/aa clone <x> <y> <z>");
+
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                player.sendMessage(ChatColor.RED + message + ChatColor.AQUA + " /aa clone <x> <y> <z>");
+
             }
 
         }
         else{
-            p.sendMessage("§c[AA] Sorry, but you have no permission to use this command!");
+
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(ChatColor.RED + message);
+
         }
 
         return true;

@@ -1,5 +1,6 @@
 package commands;
 
+import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
@@ -15,31 +16,34 @@ public class CmdGiveArmorstand implements CommandInterface {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
-        if (p.getGameMode() == GameMode.CREATIVE) {
+        if (player.getGameMode() == GameMode.CREATIVE) {
 
             if (args.length == 2) {
 
-                Integer i = Integer.parseInt(args[1]);
+                Integer itemAmount = Integer.parseInt(args[1]);
 
-                if (i <= 64) {
-                    ItemStack itemstack = new ItemStack(Material.ARMOR_STAND, i);
-                    p.getInventory().addItem(itemstack);
-                    p.sendMessage(ChatColor.GOLD + "[AA] Added " + i + " armor stands to your inventory!");
+                if (itemAmount > 16) {
+                    itemAmount = 16;
                 }
-                else {
-                    p.sendMessage(ChatColor.RED + "[AA] You can not get more than 64 armor stands at once!");
-                }
+
+                ItemStack itemstack = new ItemStack(Material.ARMOR_STAND, itemAmount);
+                player.getInventory().addItem(itemstack);
+                player.sendMessage(ChatColor.GOLD + "[AA] Added " + itemAmount + " armor stands to your inventory!");
+
             }
 
             else {
-                p.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use " + ChatColor.AQUA + "/aa give <amount>");
+
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                player.sendMessage(org.bukkit.ChatColor.RED + message + org.bukkit.ChatColor.AQUA + " /aa head <amount>");
+
             }
 
         }
         else {
-            p.sendMessage(ChatColor.RED + "[AA] Sorry, but you need to be in creative mode to use this command!");
+            player.sendMessage(ChatColor.RED + "[AA] Sorry, but you need to be in creative mode to use this command!");
         }
 
         return true;

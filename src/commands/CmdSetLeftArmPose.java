@@ -1,5 +1,6 @@
 package commands;
 
+import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,61 +16,69 @@ public class CmdSetLeftArmPose implements CommandInterface{
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
-        if (p.hasPermission("aa.edit")) {
+        if (player.hasPermission("aa.edit")) {
 
             if (args.length == 5) {
 
-                Float f = Float.parseFloat(args[4]);
+                Float distance = Float.parseFloat(args[4]);
 
-                if (f <= 100) {
+                if (distance <= 100) {
 
-                    double a = 0;
-                    double b = 0;
-                    double c = 0;
+                    double arg_roll = 0;
+                    double arg_yaw = 0;
+                    double arg_pitch = 0;
                     try {
-                        a = Integer.parseInt(args[1]);
-                        b = Integer.parseInt(args[2]);
-                        c = Integer.parseInt(args[3]);
-                    } catch(NumberFormatException ex) {}
+                        arg_roll = Integer.parseInt(args[1]);
+                        arg_yaw = Integer.parseInt(args[2]);
+                        arg_pitch = Integer.parseInt(args[3]);
+                    } catch (NumberFormatException ex) {}
 
-                    a = Math.toRadians(a);
-                    b = Math.toRadians(b);
-                    c = Math.toRadians(c);
+                    arg_roll = Math.toRadians(arg_roll);
+                    arg_yaw = Math.toRadians(arg_yaw);
+                    arg_pitch = Math.toRadians(arg_pitch);
 
-                    EulerAngle ea = new EulerAngle(a,b,c);
+                    EulerAngle newPoseEulerAngle = new EulerAngle(arg_roll,arg_yaw,arg_pitch);
 
-                    for (Entity entity : p.getNearbyEntities(f, f, f)) {
+                    for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand) {
                             ArmorStand armorstand = (ArmorStand) entity;
-                            armorstand.setLeftArmPose(ea);
+                            armorstand.setLeftArmPose(newPoseEulerAngle);
                         }
                     }
 
+                    String message = AdvancedArmorStandsMain.getInstance().getMessageString("modification", player.getLocale()).replace("%s", distance.toString());
+                    player.sendMessage(ChatColor.GOLD + message);
+
+                } else {
+
+                    String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
+                    player.sendMessage(ChatColor.RED + message);
+
                 }
 
-                if (f > 100) {
-                    p.sendMessage("§c[AA] Please do not use higher values than 100 for the range!");
-                }
+            } else {
+
+                String message_01 = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                String message_02 = AdvancedArmorStandsMain.getInstance().getMessageString("pose_error_01", player.getLocale());
+                player.sendMessage(ChatColor.RED + message_01 + ChatColor.AQUA + " /aa lap <roll> <yaw> <pitch> <range>");
+                player.sendMessage(ChatColor.RED + message_02);
 
             }
 
-            else {
-                p.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use " + ChatColor.AQUA + "/aa lap <roll> <yaw> <pitch> <range>");
-                p.sendMessage(ChatColor.RED + "[AA] Note: <roll> <yaw> and <pitch> are degrees from 0 to 360!");
-            }
+        } else {
 
-        }
-        else {
-            p.sendMessage("§c[AA] Sorry, but you have no permission to use this command!");
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(ChatColor.RED + message);
+
         }
 
         return true;
+
     }
 
 }
-
 
 
 

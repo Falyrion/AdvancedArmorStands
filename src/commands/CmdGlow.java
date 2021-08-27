@@ -16,55 +16,65 @@ public class CmdGlow implements AdvancedArmorStandsMain.CommandInterface {
         Player player = (Player) sender;
 
         if (player.hasPermission("aa.edit")) {
+
             if (args.length == 3) {
 
-                Float f = Float.parseFloat(args[2]);
+                Float distance = Float.parseFloat(args[2]);
 
                 if (!args[1].equalsIgnoreCase("on") && !args[1].equalsIgnoreCase("off")) {
-                    player.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use " + ChatColor.AQUA + "/aa glow <on/off> <range>");
+
+                    String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                    player.sendMessage(ChatColor.RED + message + ChatColor.AQUA + " /aa glow <on/off> <range>");
+
                 } else {
 
-                    if (f <= 100) {
+                    if (distance <= 100) {
 
-                        for (Entity entity : player.getNearbyEntities(f, f, f)) {
+                        for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                             if (entity instanceof ArmorStand) {
                                 ArmorStand armorstand = (ArmorStand) entity;
 
                                 switch (args[1]) {
                                     case "on":
-                                        if (armorstand.isGlowing()) {
-                                            player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand is already glowing!");
-                                        } else {
+                                        if (!armorstand.isGlowing()) {
                                             armorstand.setGlowing(true);
-                                            player.sendMessage(ChatColor.GOLD + "[AA] Added glow effect to a nearby armor stand!");
                                         }
                                         break;
 
                                     case "off":
                                         if (armorstand.isGlowing()) {
                                             armorstand.setGlowing(false);
-                                            player.sendMessage(ChatColor.GOLD + "[AA] Removed glow effect from a nearby armor stand!");
-                                        } else {
-                                            player.sendMessage(ChatColor.RED + "[AA] A nearby armor stand has already no glow effect!");
                                         }
                                         break;
                                 }
+
+                                String message = AdvancedArmorStandsMain.getInstance().getMessageString("modification", player.getLocale()).replace("%s", distance.toString());
+                                player.sendMessage(ChatColor.GOLD + message);
+
                             }
                         }
 
-                    } if (f > 100) {
-                        player.sendMessage(ChatColor.RED + "[AA] Please do not use higher values than 100 for the range!");
+                    } else {
+
+                        String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
+                        player.sendMessage(ChatColor.RED + message);
+
                     }
 
                 }
 
-
-
             } else {
-                player.sendMessage(ChatColor.RED + "[AA] This command was not used correctly! Please use " + ChatColor.AQUA + "/aa glow <on/off> <range>");
+
+                String message = AdvancedArmorStandsMain.getInstance().getMessageString("wrong_command_usage", player.getLocale());
+                player.sendMessage(ChatColor.RED + message + ChatColor.AQUA + " /aa glow <on/off> <range>");
+
             }
+
         } else {
-            player.sendMessage(ChatColor.RED + "[AA] Sorry, but you have no permission to use this command!");
+
+            String message = AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale());
+            player.sendMessage(ChatColor.RED + message);
+
         }
 
         return true;
