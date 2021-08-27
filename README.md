@@ -26,7 +26,8 @@ This plugin was made for Spigot v.1.17.x
 
 # Commands and Permissions
 
-Overview over all commands available in this plugin. All permissions are set to `true` by default.
+- Overview over all commands available in this plugin. All permissions are set to `true` by default.
+- If you want to disable access to player heads in both menu and per command, set the permission `aa.head` to `false`.
 
 | Command                                            | Permission | Description                      |
 | -------------------------------------------------- |:----------:|:--------------------------------:|
