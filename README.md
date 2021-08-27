@@ -27,6 +27,9 @@ Access all the hidden vanilla armor stands options with an easy menu. Perfect fo
 
 Just stand next to the armor stand you want to modify and type the command `/aa` in chat! A menu will pop up with all available options!
 
+![Text](images/advanced_armor_stands.png "Overview")
+
+
 <a name="depencies"></a>
 # Depencies
 
@@ -34,6 +37,12 @@ This plugin was made for Spigot v.1.17.x.
 
 <a name="commands"></a>
 # Commands and Permissions
+
+### Pose command cheat sheet
+
+![Text](images/poses_cheat_sheet.png "Cheat Sheet")
+
+### Commands overview
 
 - Overview over all commands available in this plugin. All permissions are set to `true` by default.
 - If you want to disable access to player heads in both menu and per command, set the permission `aa.head` to `false`.
