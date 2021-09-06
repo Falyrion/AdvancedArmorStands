@@ -3,7 +3,6 @@ package com.falyrion.aa;
 import commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
-import org.bukkit.block.data.type.Switch;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -19,14 +18,17 @@ import java.io.IOException;
 public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     private static AdvancedArmorStandsMain instance;
+
     public static AdvancedArmorStandsMain getInstance() {
         return instance;
     }
 
     private GUI gui;
 
-    public String aaVersion = "v.1.17.2.0";
+    public String aaVersion = "v.1.17.3.0";
     public String apiVersion = "1.17+";
+
+    FileConfiguration config = getConfig();
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Handling commands
@@ -169,17 +171,29 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
+        // Create GUI class
         gui = new GUI();
 
         instance = this;
 
+        // Call function to register commands
         this.registerCommands();
+
+        // Initiate config file
+        this.saveDefaultConfig();
 
         // Initiate language files
         createLanguageConfig();
 
+        // Enable Event-Listener
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClickHandler(), this);
 
+        if (config.getBoolean("spawnWithArms")) {
+            // Enable only when config-boolean set to true
+            Bukkit.getServer().getPluginManager().registerEvents(new SpawnHandler(), this);
+        }
+
+        // Debug
         System.out.println("++++++++++++++++++++++ [Advanced ArmorStands] ++++++++++++++++++++++");
         System.out.println("[AdvancedArmorStands] Version " + aaVersion + " enabled");
         System.out.println("[Advanced ArmorStands] Attention: This version supports bukkit " + apiVersion + " only.");

@@ -8,6 +8,7 @@ This is a plugin for CraftBukkit/ Spigot. Download from [https://www.spigotmc.or
 - [Overview and Features](#overview)
 - [Depencies](#depencies)
 - [Commands and Permissions](#commands)
+- [Config](#config)
 - [Languages](#language)
 
 <a name="overview"></a>
@@ -67,7 +68,7 @@ This plugin was made for Spigot v.1.17.x.
 | /aa rlp \<roll> \<jaw> \<pitch> \<range>           |  aa.edit   | Adjusts the right leg pose of all armor stands in a radius of \<range> blocks around the player. |
 | /aa llp \<roll> \<jaw> \<pitch> \<range>           |  aa.edit   | Adjusts the left leg pose of all armor stands in a radius of \<range> blocks around the player. |
 | /aa stats                                          |  aa.edit   | Shows all angles of a nearby armor stand |
-| /aa name \<name>                                   |  aa.names  | Gives all armor stands in 1 block range a colorable name. |
+| /aa name \<name>                                   |  aa.names  | Gives all armor stands in 1 block range a colorable name. Supports all default game color codes. |
 | /aa hidenames \<range>                             |  aa.names  | Removes names from all armor stands in a radius of \<range> blocks around the player. |
 | /aa tp \<x> \<y> \<z>                              |  aa.tp     | Teleports a nearby armor stand to the coords \<x> \<y> \<z>. The coords are the exact coords. To teleport a armor stand in the middle of a block use x.5 and z.5. | 
 | /aa clone \<x> \<y> \<z>                           |  aa.clone  | Duplicates a nearby armor stand to the coords \<x> \<y> \<z>. It copies all settings but names, visibility or equipment. In creative mode equipment will be copied. |
@@ -76,9 +77,25 @@ This plugin was made for Spigot v.1.17.x.
 | /aa head \<player-name> \<amount>                  |  aa.head   | Gives the head of a player. Use \<player-name> for the player name and \<amount> for the amount of heads you want.|
 | /aa give \<amount>                                 |  NONE      | Adds an armor stand to your inventory. Player needs creative mode to use this. | 
 
+<a name="config"></a>
+# Config
+
+The config.yml-file contains configuration options for the plugin. To apply any changes, save the file and reload or restart your server.
+
+| Config-Path   | Default value | Description                                                                 |
+| ------------- | ------------- | --------------------------------------------------------------------------- |
+| spawnWithArms | true          | Defines wheather new armor stands spawn with arms already turned on or not. |
+
 <a name="language"></a>
 # Languages
 
-AdvancedArmorStands can support multiple languages simultaneously. The language used is the language the user has set in his game settings. If that language is not available, egnlish is the default option.
+AdvancedArmorStands can support multiple languages simultaneously. The language used is the language the user has set in his game settings. If that language is not available, english is the default option.
+
+### Add custom languages
+
 - To add a new language, navigate to the file `AdvancedArmorStands/ressources/lang.yml` in your servers plugin folder. Copy the section "default" and paste it to the bottom of the file. Replace the string "en_us" in your pasted section with your desired language string. After that replace all the english sentences with your own language.
 - If you want to add a new language, consider sending it in to be added to the plugin. That way all players can benefit from it.
+
+### Color codes in the language file
+
+- To change the visual color of a sentence, you can use the default game color codes. But note, that you have to use a `§` instead of the `&` you might be used to.

@@ -2,7 +2,7 @@ package commands;
 
 import com.falyrion.aa.AdvancedArmorStandsMain;
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

@@ -1,7 +1,7 @@
-# Languages file for AdvancedArmorStands
-
 # ######################################################################################################################
-# HOW TO ADD YOUR OWN LANGUAGE:
+# Languages file for AdvancedArmorStands
+#
+# How to add your own language:
 # -> Copy the whole section "default"
 # -> Paste it at the bottom of the file below
 # -> replace the word "default" in your copied section with your own language string.
@@ -9,7 +9,8 @@
 # - If you create a new language that does not exist yet, consider creating an official translation for this plugin
 #   and help many players!
 #
-# Github Link: https://github.com/Falyrion/AdvancedArmorStands
+# For help visit:
+# GitHub Link: https://github.com/Falyrion/AdvancedArmorStands
 # Spigot Website: https://www.spigotmc.org/resources/advanced-armor-stands.38513/
 # ######################################################################################################################
 

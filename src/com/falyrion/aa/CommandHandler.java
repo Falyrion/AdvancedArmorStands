@@ -1,7 +1,6 @@
 package com.falyrion.aa;
 
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

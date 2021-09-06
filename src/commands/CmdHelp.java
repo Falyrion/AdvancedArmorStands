@@ -1,7 +1,7 @@
 package commands;
 
 import com.falyrion.aa.AdvancedArmorStandsMain.CommandInterface;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
