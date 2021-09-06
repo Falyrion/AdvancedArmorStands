@@ -1,5 +1,7 @@
+![Text](images/advanced_armorstands_banner.png "Banner")
+
 # Advanced Armor Stands
- 
+
 This is a plugin for CraftBukkit/ Spigot. Download from [https://www.spigotmc.org/resources/advanced-armor-stands.38513/](https://www.spigotmc.org/resources/advanced-armor-stands.38513/)
 
 ### Contents
@@ -7,7 +9,6 @@ This is a plugin for CraftBukkit/ Spigot. Download from [https://www.spigotmc.or
 - [Depencies](#depencies)
 - [Commands and Permissions](#commands)
 - [Languages](#language)
-
 
 <a name="overview"></a>
 # Overview
