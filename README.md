@@ -61,6 +61,7 @@ This plugin was made for Spigot v.1.17.x.
 | /aa visible \<on/off> \<range>                     |  aa.edit   | Use "on" to make all armor stands visible. Use "off" to make all armor stands invisible. \<range> defines the range around the player in which armor stands are affected. |
 | /aa size \<normal/small> \<range>                  |  aa.edit   | Use "normal" to make all armor stands normal sized. Use "small" to make all armor stands smalls. \<range> defines the range around the player in which armor stands are affected. |  
 | /aa glow \<on/off> \<range>                        |  aa.edit   | Use "on" to make all armor stands glow. Use "off" to remove the glow effect. \<range> defines the range around the player in which armor stands are affected. |
+| /aa invulnerable \<on/off> \<range>                |  aa.edit   | Makes armor stands unbreakable/ breakable. Note: Players in creative mode can always destroy an armor stand. |
 | /aa hp \<roll> \<jaw> \<pitch> \<range>            |  aa.edit   | Adjusts the head pose of all armor stands in a radius of <range> blocks around the player. |
 | /aa bp \<roll> \<jaw> \<pitch> \<range>            |  aa.edit   | Adjusts the body pose of all armor stands in a radius of <range> blocks around the player. |
 | /aa rap \<roll> \<jaw> \<pitch> \<range>           |  aa.edit   | Adjusts the right arm pose of all armor stands in a radius of \<range> blocks around the player. |
