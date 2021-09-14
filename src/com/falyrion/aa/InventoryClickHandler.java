@@ -477,9 +477,9 @@ public class InventoryClickHandler implements Listener {
                 }
                 break;
 
-            case  "§e§lMake glowing":
+            case "§e§lMake glowing":
                 if (player.hasPermission("aa.edit")) {
-                    for(Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)) {
+                    for(Entity entity : player.getNearbyEntities(1, 1, 1)) {
                         if(entity instanceof ArmorStand) {
                             if(!entity.isGlowing()) {
                                 ArmorStand armorstand = (ArmorStand) entity;
@@ -495,9 +495,9 @@ public class InventoryClickHandler implements Listener {
                 }
                 break;
 
-            case  "§e§lRemove glow":
+            case "§e§lRemove glow":
                 if (player.hasPermission("aa.edit")) {
-                    for(Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)) {
+                    for(Entity entity : player.getNearbyEntities(1, 1, 1)) {
                         if(entity instanceof ArmorStand) {
                             if(entity.isGlowing()) {
                                 ArmorStand armorstand = (ArmorStand) entity;

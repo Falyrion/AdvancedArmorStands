@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
@@ -25,10 +26,12 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     private GUI gui;
 
-    public String aaVersion = "v.1.17.3.0";
+    public String aaVersion = "v.1.17.4.0";
     public String apiVersion = "1.17+";
 
     FileConfiguration config = getConfig();
+
+    private Logger log = Bukkit.getLogger();
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Handling commands
@@ -84,17 +87,26 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
      */
     private void createLanguageConfig() {
 
-        saveResource("resources/lang.yml", false);
+        // Check if file exists
+        File file = new File("plugins\\AdvancedArmorStands\\resources\\lang.yml");
+        if(!file.exists()) {
 
-        languageConfigFile = new File(getDataFolder(), "resources/lang.yml");
-        languageConfig = new YamlConfiguration();
-        try {
-            languageConfig.load(languageConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            System.out.println("[AdvancedArmorStands] Could not load language file");
-            System.out.println("[AdvancedArmorStands] Please delete the folder AdvancedArmorStands inside your plugins folder and restart or reload the server.");
-            e.printStackTrace();
+            // Create file if it does not exist
+            log.info("[AdvancedArmorStands] Creating language file");
+
+            saveResource("resources/lang.yml", false);
         }
+
+            languageConfigFile = new File(getDataFolder(), "resources/lang.yml");
+            languageConfig = new YamlConfiguration();
+            try {
+                languageConfig.load(languageConfigFile);
+            } catch (IOException | InvalidConfigurationException e) {
+                log.warning("[AdvancedArmorStands] Could not load language file");
+                log.warning("[AdvancedArmorStands] Please delete the folder AdvancedArmorStands inside your plugins folder and restart or reload the server.");
+                e.printStackTrace();
+            }
+
 
     }
 
@@ -194,15 +206,12 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         }
 
         // Debug
-        System.out.println("++++++++++++++++++++++ [Advanced ArmorStands] ++++++++++++++++++++++");
-        System.out.println("[AdvancedArmorStands] Version " + aaVersion + " enabled");
-        System.out.println("[Advanced ArmorStands] Attention: This version supports bukkit " + apiVersion + " only.");
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        log.info("[AdvancedArmorStands] Version " + aaVersion + " (for bukkit " + apiVersion + ") enabled");
     }
 
     @Override
     public void onDisable() {
-        System.out.println("[AdvancedArmorStands] disabled");
+        log.info("[AdvancedArmorStands] disabled");
     }
 
 }
