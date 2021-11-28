@@ -33,7 +33,7 @@ Just stand next to the armor stand you want to modify and type the command `/aa`
 
 
 <a name="depencies"></a>
-# Depencies
+# Dependencies
 
 This plugin was made for Spigot v.1.17.x.
 
