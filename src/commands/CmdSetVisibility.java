@@ -17,7 +17,7 @@ public class CmdSetVisibility implements CommandInterface {
 
         Player player = (Player) sender;
 
-        if (player.hasPermission("aa.edit")) {
+        if (player.hasPermission("aa.visible")) {
 
             if (args.length == 3) {
 
