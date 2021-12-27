@@ -16,7 +16,7 @@ public class CmdRemoveCustomName implements CommandInterface {
 
         Player player = (Player) sender;
 
-        if (player.hasPermission("aa.edit")) {
+        if (player.hasPermission("aa.names")) {
 
             if (args.length == 2) {
 

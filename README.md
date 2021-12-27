@@ -58,7 +58,6 @@ This plugin was made for Spigot v.1.17.x.
 | /aa arms \<on/off> \<range>                        |  aa.edit   | Use "on" to give all armor stands arms. Use "off" to remove arms of all armor stands. \<range> defines the range around the player in which armor stands are affected. |
 | /aa base \<on/off> \<range>                        |  aa.edit   | Use "on" to give all armor stands a baseplate. Use "off" to remove the baseplate of all armor stands. \<range> defines the range around the player in which armor stands are affected. |
 | /aa gravity \<on/off> \<range>                     |  aa.edit   | Use "on" to give all armor stands gravity. Use "off" to remove gravity from all armor stands. \<range> defines the range around the player in which armor stands are affected. |
-| /aa visible \<on/off> \<range>                     |  aa.edit   | Use "on" to make all armor stands visible. Use "off" to make all armor stands invisible. \<range> defines the range around the player in which armor stands are affected. |
 | /aa size \<normal/small> \<range>                  |  aa.edit   | Use "normal" to make all armor stands normal sized. Use "small" to make all armor stands smalls. \<range> defines the range around the player in which armor stands are affected. |  
 | /aa glow \<on/off> \<range>                        |  aa.edit   | Use "on" to make all armor stands glow. Use "off" to remove the glow effect. \<range> defines the range around the player in which armor stands are affected. |
 | /aa invulnerable \<on/off> \<range>                |  aa.edit   | Makes armor stands unbreakable/ breakable. Note: Players in creative mode can always destroy an armor stand. |
@@ -69,6 +68,7 @@ This plugin was made for Spigot v.1.17.x.
 | /aa rlp \<roll> \<jaw> \<pitch> \<range>           |  aa.edit   | Adjusts the right leg pose of all armor stands in a radius of \<range> blocks around the player. |
 | /aa llp \<roll> \<jaw> \<pitch> \<range>           |  aa.edit   | Adjusts the left leg pose of all armor stands in a radius of \<range> blocks around the player. |
 | /aa stats                                          |  aa.edit   | Shows all angles of a nearby armor stand |
+| /aa visible \<on/off> \<range>                     |  aa.visible   | Use "on" to make all armor stands visible. Use "off" to make all armor stands invisible. \<range> defines the range around the player in which armor stands are affected. |
 | /aa name \<name>                                   |  aa.names  | Gives all armor stands in 1 block range a colorable name. Supports all default game color codes. |
 | /aa hidenames \<range>                             |  aa.names  | Removes names from all armor stands in a radius of \<range> blocks around the player. |
 | /aa tp \<x> \<y> \<z>                              |  aa.tp     | Teleports a nearby armor stand to the coords \<x> \<y> \<z>. The coords are the exact coords. To teleport a armor stand in the middle of a block use x.5 and z.5. | 
