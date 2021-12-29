@@ -73,8 +73,6 @@ This plugin was made for Spigot v.1.17.x.
 | /aa hidenames \<range>                             |  aa.names  | Removes names from all armor stands in a radius of \<range> blocks around the player. |
 | /aa tp \<x> \<y> \<z>                              |  aa.tp     | Teleports a nearby armor stand to the coords \<x> \<y> \<z>. The coords are the exact coords. To teleport a armor stand in the middle of a block use x.5 and z.5. | 
 | /aa clone \<x> \<y> \<z>                           |  aa.clone  | Duplicates a nearby armor stand to the coords \<x> \<y> \<z>. It copies all settings but names, visibility or equipment. In creative mode equipment will be copied. |
-| /aa name \<name>                                   |  aa.names  | Gives all armor stands in 1 block range a colorable name. |
-| /aa hidenames \<range>                             |  aa.names  | Removes names from all armor stands in a radius of \<range> blocks around the player. |
 | /aa head \<player-name> \<amount>                  |  aa.head   | Gives the head of a player. Use \<player-name> for the player name and \<amount> for the amount of heads you want.|
 | /aa give \<amount>                                 |  NONE      | Adds an armor stand to your inventory. Player needs creative mode to use this. | 
 
@@ -86,6 +84,7 @@ The config.yml-file contains configuration options for the plugin. To apply any 
 | Config-Path   | Default value | Description                                                                 |
 | ------------- | ------------- | --------------------------------------------------------------------------- |
 | spawnWithArms | true          | Defines wheather new armor stands spawn with arms already turned on or not. |
+| maxDistance   | 100           | Defines the max range that can be set.                                      |
 
 <a name="language"></a>
 # Languages

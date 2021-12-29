@@ -28,7 +28,7 @@ public class CmdGlow implements AdvancedArmorStandsMain.CommandInterface {
 
                 } else {
 
-                    if (distance <= 100) {
+                    if (distance <= AdvancedArmorStandsMain.getInstance().getMaxDistance()) {
 
                         for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                             if (entity instanceof ArmorStand) {
@@ -57,6 +57,7 @@ public class CmdGlow implements AdvancedArmorStandsMain.CommandInterface {
                     } else {
 
                         String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
+                        message = String.format(message, AdvancedArmorStandsMain.getInstance().getMaxDistance());
                         player.sendMessage(ChatColor.RED + message);
 
                     }
