@@ -24,6 +24,8 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         return instance;
     }
 
+    private Float maxDistance;
+
     private GUI gui;
 
     public String aaVersion = "v.1.17.4.0";
@@ -177,6 +179,14 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     }
 
+    public Float getMaxDistance() {
+        return maxDistance;
+    }
+
+    public void setMaxDistance(Float maxDistance) {
+        this.maxDistance = maxDistance;
+    }
+
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Enable, Disable
 
@@ -203,6 +213,14 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         if (config.getBoolean("spawnWithArms")) {
             // Enable only when config-boolean set to true
             Bukkit.getServer().getPluginManager().registerEvents(new SpawnHandler(), this);
+        }
+
+        if (config.contains("maxDistance")
+                && config.getDouble("maxDistance") > 0
+                && config.getDouble("maxDistance") <= 100f)) {
+            maxDistance = (float) config.getDouble("maxDistance");
+        } else {
+            maxDistance = 100f;
         }
 
         // Debug
