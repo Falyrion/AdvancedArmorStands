@@ -84,7 +84,6 @@ The config.yml-file contains configuration options for the plugin. To apply any 
 | Config-Path   | Default value | Description                                                                 |
 | ------------- | ------------- | --------------------------------------------------------------------------- |
 | spawnWithArms | true          | Defines wheather new armor stands spawn with arms already turned on or not. |
-| ------------- | ------------- | --------------------------------------------------------------------------- |
 | maxDistance   | 100           | Defines the max range that can be set.                                      |
 
 <a name="language"></a>
