@@ -28,7 +28,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     private GUI gui;
 
-    public String aaVersion = "v.1.17.4.0";
+    public String aaVersion = "v.1.17.5.0";
     public String apiVersion = "1.17+";
 
     FileConfiguration config = getConfig();
@@ -222,6 +222,9 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         } else {
             maxDistance = 100f;
         }
+
+        // Enable metrics
+        Metrics metrics = new Metrics(this, 13743);
 
         // Debug
         log.info("[AdvancedArmorStands] Version " + aaVersion + " (for bukkit " + apiVersion + ") enabled");
