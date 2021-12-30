@@ -24,7 +24,7 @@ public class CmdSetBodyPose implements CommandInterface {
 
                 Float distance = Float.parseFloat(args[4]);
 
-                if (distance <= AdvancedArmorStandsMain.getInstance().getMaxDistance()) {
+                if (distance <= AdvancedArmorStandsMain.getInstance().editRange) {
 
                     double arg_roll = 0;
                     double arg_yaw = 0;
@@ -54,7 +54,7 @@ public class CmdSetBodyPose implements CommandInterface {
                 } else {
 
                     String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
-                    message = String.format(message, AdvancedArmorStandsMain.getInstance().getMaxDistance());
+                    message = String.format(message, AdvancedArmorStandsMain.getInstance().editRange);
                     player.sendMessage(ChatColor.RED + message);
 
                 }

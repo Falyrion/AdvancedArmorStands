@@ -7,5 +7,6 @@
 
 # If true, armor stands will spawn with arms
 spawnWithArms: true
-# the max range, it should be bigger than 0 and smaller than 100
-maxDistance: 100
+
+# The max range (blocks) in which armor stands can get effected by the plugins commands
+commandEditRange: 100

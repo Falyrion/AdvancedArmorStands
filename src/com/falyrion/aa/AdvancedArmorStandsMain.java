@@ -24,11 +24,11 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         return instance;
     }
 
-    private Float maxDistance;
+    public float editRange = 100f;
 
     private GUI gui;
 
-    public String aaVersion = "v.1.17.5.0";
+    public String aaVersion = "v.1.17.6.0";
     public String apiVersion = "1.17+";
 
     FileConfiguration config = getConfig();
@@ -179,14 +179,6 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     }
 
-    public Float getMaxDistance() {
-        return maxDistance;
-    }
-
-    public void setMaxDistance(Float maxDistance) {
-        this.maxDistance = maxDistance;
-    }
-
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Enable, Disable
 
@@ -215,13 +207,12 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
             Bukkit.getServer().getPluginManager().registerEvents(new SpawnHandler(), this);
         }
 
-        if (config.contains("maxDistance")
-                && config.getDouble("maxDistance") > 0
-                && config.getDouble("maxDistance") <= 100f)) {
-            maxDistance = (float) config.getDouble("maxDistance");
+        if (config.contains("commandEditRange")) {
+            editRange = (float) config.getDouble("commandEditRange");
         } else {
-            maxDistance = 100f;
+            config.set("commandEditRange", 100);
         }
+
 
         // Enable metrics
         Metrics metrics = new Metrics(this, 13743);

@@ -81,10 +81,10 @@ This plugin was made for Spigot v.1.17.x.
 
 The config.yml-file contains configuration options for the plugin. To apply any changes, save the file and reload or restart your server.
 
-| Config-Path   | Default value | Description                                                                 |
-| ------------- | ------------- | --------------------------------------------------------------------------- |
-| spawnWithArms | true          | Defines wheather new armor stands spawn with arms already turned on or not. |
-| maxDistance   | 100           | Defines the max range that can be set.                                      |
+| Config-Path      | Default value | Description                                                                 |
+| ---------------- | ------------- | --------------------------------------------------------------------------- |
+| spawnWithArms    | true          | Defines wheather new armor stands spawn with arms already turned on or not. |
+| commandEditRange | 100           | Defines the max range in which commands can effect armor stands             |
 
 <a name="language"></a>
 # Languages
