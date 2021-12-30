@@ -24,9 +24,11 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         return instance;
     }
 
+    public float editRange = 100f;
+
     private GUI gui;
 
-    public String aaVersion = "v.1.17.5.0";
+    public String aaVersion = "v.1.17.6.0";
     public String apiVersion = "1.17+";
 
     FileConfiguration config = getConfig();
@@ -204,6 +206,13 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
             // Enable only when config-boolean set to true
             Bukkit.getServer().getPluginManager().registerEvents(new SpawnHandler(), this);
         }
+
+        if (config.contains("commandEditRange")) {
+            editRange = (float) config.getDouble("commandEditRange");
+        } else {
+            config.set("commandEditRange", 100);
+        }
+
 
         // Enable metrics
         Metrics metrics = new Metrics(this, 13743);

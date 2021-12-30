@@ -22,7 +22,7 @@ public class CmdRemoveCustomName implements CommandInterface {
 
                 Float distance = Float.parseFloat(args[1]);
 
-                    if (distance <= 100) {
+                    if (distance <= AdvancedArmorStandsMain.getInstance().editRange) {
 
                         for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                             if (entity instanceof ArmorStand) {
@@ -41,6 +41,7 @@ public class CmdRemoveCustomName implements CommandInterface {
                     } else {
 
                         String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
+                        message = String.format(message, AdvancedArmorStandsMain.getInstance().editRange);
                         player.sendMessage(org.bukkit.ChatColor.RED + message);
 
                     }

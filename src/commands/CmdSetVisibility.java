@@ -30,7 +30,7 @@ public class CmdSetVisibility implements CommandInterface {
 
                 } else {
 
-                    if (distance <= 100) {
+                    if (distance <= AdvancedArmorStandsMain.getInstance().editRange) {
 
                         for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                             if (entity instanceof ArmorStand) {
@@ -59,6 +59,7 @@ public class CmdSetVisibility implements CommandInterface {
                     } else {
 
                         String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
+                        message = String.format(message, AdvancedArmorStandsMain.getInstance().editRange);
                         player.sendMessage(ChatColor.RED + message);
 
                     }
