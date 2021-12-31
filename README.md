@@ -2,7 +2,8 @@
 
 # Advanced Armor Stands
 
-This is a plugin for CraftBukkit/ Spigot. Download from [https://www.spigotmc.org/resources/advanced-armor-stands.38513/](https://www.spigotmc.org/resources/advanced-armor-stands.38513/)
+This is a plugin for CraftBukkit/ Spigot, adding more functionality for armor stands.
+Download from [https://www.spigotmc.org/resources/advanced-armor-stands.38513/](https://www.spigotmc.org/resources/advanced-armor-stands.38513/)
 
 ### Contents
 - [Overview and Features](#overview)
