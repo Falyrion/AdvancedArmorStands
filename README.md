@@ -38,7 +38,7 @@ Just stand next to the armor stand you want to modify and type the command `/aa`
 <a name="depencies"></a>
 # Dependencies
 
-This plugin was made for Spigot v.1.17.x.
+This plugin was made for Spigot v.1.17 and later versions.
 
 <a name="commands"></a>
 # Commands and Permissions
