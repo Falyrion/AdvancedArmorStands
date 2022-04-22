@@ -24,11 +24,6 @@ public class CommandHandler implements CommandExecutor {
     public CommandInterface getCommandExecutor(String name) {
         return commandsMap.get(name);
     }
-    // test
-
-    public void uwu() {
-        // pass
-    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String commandLabel, String[] arguments) {
