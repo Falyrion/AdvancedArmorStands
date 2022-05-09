@@ -12,8 +12,7 @@ public class PlacedHandler implements Listener {
 
     @EventHandler
     public void onArmorStandPlace(EntityPlaceEvent event) {
-        if (event.getEntity() instanceof  ArmorStand) {
-            ArmorStand armorstand = (ArmorStand) event.getEntity();
+        if (event.getEntity() instanceof ArmorStand armorstand) {
             armorstand.setArms(true);
             if (!AdvancedArmorStandsMain.getInstance().isOwnershipOfPlacedArmorStand()) {
                 return;

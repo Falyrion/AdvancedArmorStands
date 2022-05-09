@@ -84,8 +84,8 @@ public class CmdReciveCustomHead implements CommandInterface {
                 String sucessMessage = AdvancedArmorStandsMain.getInstance().getMessageString("head_success", player.getLocale()).replace("%s", playerName + " * " + headAmount);
                 player.sendMessage(ChatColor.GOLD + sucessMessage);
 
-                for(Player onlinePlayers : Bukkit.getOnlinePlayers()){
-                    if(onlinePlayers.hasPermission("aa.adminbroadcast")){
+                for (Player onlinePlayers : Bukkit.getOnlinePlayers()) {
+                    if (onlinePlayers.hasPermission("aa.adminbroadcast")) {
                         onlinePlayers.sendMessage("§7§o[Advanced ArmorStands: Given head of " + playerName + " * " + headAmount + " to " + player.getName() + "]");
                     }
                 }
