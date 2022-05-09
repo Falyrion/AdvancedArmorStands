@@ -31,8 +31,7 @@ public class CmdSetRotation implements CommandInterface {
 
                         if (args[1].equalsIgnoreCase("right")) {
                             for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                                if(entity instanceof ArmorStand) {
-                                    ArmorStand armorstand = (ArmorStand) entity;
+                                if (entity instanceof ArmorStand armorstand) {
                                     if (!AdvancedArmorStandsMain.getInstance().canChange(armorstand, player)) {
                                         continue;
                                     }
@@ -50,8 +49,7 @@ public class CmdSetRotation implements CommandInterface {
                         }
                         if (args[1].equalsIgnoreCase("left")) {
                             for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                                if(entity instanceof ArmorStand) {
-                                    ArmorStand armorstand = (ArmorStand) entity;
+                                if (entity instanceof ArmorStand armorstand) {
                                     Location loc = armorstand.getLocation();
                                     Float ayaw = armorstand.getLocation().getYaw();
                                     loc.setYaw(ayaw - i4);

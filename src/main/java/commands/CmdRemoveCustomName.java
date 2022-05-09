@@ -25,8 +25,7 @@ public class CmdRemoveCustomName implements CommandInterface {
                     if (distance <= AdvancedArmorStandsMain.getInstance().editRange) {
 
                         for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                            if (entity instanceof ArmorStand) {
-                                ArmorStand armorstand = (ArmorStand) entity;
+                            if (entity instanceof ArmorStand armorstand) {
 
                                 if (!AdvancedArmorStandsMain.getInstance().canChange(armorstand, player)) {
                                     continue;

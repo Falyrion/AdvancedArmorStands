@@ -22,8 +22,7 @@ public class CmdGetArmorstandData implements CommandInterface {
             if (args.length == 1) {
 
                 for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                    if (entity instanceof ArmorStand) {
-                        ArmorStand armorstand = (ArmorStand) entity;
+                    if (entity instanceof ArmorStand armorstand) {
 
                         double roll_hp = armorstand.getHeadPose().getX(); roll_hp = Math.toDegrees(roll_hp); roll_hp = Math.rint(roll_hp);
                         double yaw_hp = armorstand.getHeadPose().getY(); yaw_hp = Math.toDegrees(yaw_hp); yaw_hp = Math.rint(yaw_hp);

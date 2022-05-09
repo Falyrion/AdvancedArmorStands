@@ -1,20 +1,15 @@
 package commands;
 
 import com.falyrion.aa.AdvancedArmorStandsMain;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.persistence.PersistentDataType;
-
-import java.util.logging.Logger;
 
 public class CmdGlow implements AdvancedArmorStandsMain.CommandInterface {
-    private Logger log = Bukkit.getLogger();
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
@@ -36,8 +31,7 @@ public class CmdGlow implements AdvancedArmorStandsMain.CommandInterface {
                     if (distance <= AdvancedArmorStandsMain.getInstance().editRange) {
 
                         for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                            if (entity instanceof ArmorStand) {
-                                ArmorStand armorstand = (ArmorStand) entity;
+                            if (entity instanceof ArmorStand armorstand) {
                                 if (!AdvancedArmorStandsMain.getInstance().canChange(armorstand, player)) {
                                     continue;
                                 }

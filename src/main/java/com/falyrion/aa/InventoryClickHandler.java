@@ -277,12 +277,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lArms":
                 if (player.hasPermission("aa.edit")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(!armorStand.hasArms()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!armorStand.hasArms()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
+                                    continue;
+                                }
                                 armorStand.setArms(true);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -298,12 +297,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lBaseplate invisible":
                 if (player.hasPermission("aa.edit")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(armorStand.hasBasePlate()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (armorStand.hasBasePlate()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
+                                    continue;
+                                }
                                 armorStand.setBasePlate(false);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -319,12 +317,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lBaseplate visible":
                 if (player.hasPermission("aa.edit")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(!armorStand.hasBasePlate()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!armorStand.hasBasePlate()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
+                                    continue;
+                                }
                                 armorStand.setBasePlate(true);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -340,12 +337,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lGravity off":
                 if (player.hasPermission("aa.edit")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(armorStand.hasGravity()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (armorStand.hasGravity()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
+                                    continue;
+                                }
                                 armorStand.setGravity(false);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -362,12 +358,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lGravity on":
                 if (player.hasPermission("aa.edit")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(!armorStand.hasGravity()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!armorStand.hasGravity()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
+                                    continue;
+                                }
                                 armorStand.setGravity(true);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -383,12 +378,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lInvisible":
                 if (player.hasPermission("aa.visible")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(armorStand.isVisible()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (armorStand.isVisible()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
+                                    continue;
+                                }
                                 armorStand.setVisible(false);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -404,12 +398,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lVisible":
                 if (player.hasPermission("aa.visible")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(!armorStand.isVisible()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!armorStand.isVisible()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
+                                    continue;
+                                }
                                 armorStand.setVisible(true);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -425,12 +418,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lSmall":
                 if (player.hasPermission("aa.edit")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(!armorStand.isSmall()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!armorStand.isSmall()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
+                                    continue;
+                                }
                                 armorStand.setSmall(true);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -446,12 +438,11 @@ public class InventoryClickHandler implements Listener {
             case "§e§lNormal Size":
                 if (player.hasPermission("aa.edit")) {
                     for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
-                                continue;
-                            }
-                            if(armorStand.isSmall()) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (armorStand.isSmall()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                                    continue;
+                                }
                                 armorStand.setSmall(false);
                                 player.sendMessage(ChatColor.GOLD + AdvancedArmorStandsMain.getInstance().getMessageString("modification_menu", player.getLocale()));
                             }
@@ -465,12 +456,11 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lHide Name":
-                if(player.hasPermission("aa.names")) {
-                    for(Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)){
-                        if(entity instanceof ArmorStand){
-                            if(entity.isCustomNameVisible()){
-                                ArmorStand armorStand = (ArmorStand) entity;
-                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                if (player.hasPermission("aa.names")) {
+                    for (Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)){
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (armorStand.isCustomNameVisible()) {
+                                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
                                     continue;
                                 }
                                 armorStand.setCustomNameVisible(false);
@@ -510,10 +500,9 @@ public class InventoryClickHandler implements Listener {
 
             case "§e§lMake glowing":
                 if (player.hasPermission("aa.edit")) {
-                    for(Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if(entity instanceof ArmorStand) {
-                            if(!entity.isGlowing()) {
-                                ArmorStand armorStand = (ArmorStand) entity;
+                    for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!armorStand.isGlowing()) {
                                 if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
                                     continue;
                                 }
@@ -523,7 +512,7 @@ public class InventoryClickHandler implements Listener {
                         }
                     }
                     AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                } else{
+                } else {
                     player.sendMessage(ChatColor.RED + AdvancedArmorStandsMain.getInstance().getMessageString("no_permission", player.getLocale()));
                     AdvancedArmorStandsMain.getInstance().playSoundBass(player);
                 }
@@ -531,10 +520,9 @@ public class InventoryClickHandler implements Listener {
 
             case "§e§lRemove glow":
                 if (player.hasPermission("aa.edit")) {
-                    for(Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                        if(entity instanceof ArmorStand) {
-                            if(entity.isGlowing()) {
-                                ArmorStand armorStand = (ArmorStand) entity;
+                    for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (armorStand.isGlowing()) {
                                 if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
                                     continue;
                                 }
@@ -553,8 +541,7 @@ public class InventoryClickHandler implements Listener {
             case "§e§lInvulnerable":
                 if (player.hasPermission("aa.edit")) {
                     for (Entity entity : player.getNearbyEntities(2, 2, 2)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
+                        if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
                                 continue;
                             }
@@ -676,9 +663,8 @@ public class InventoryClickHandler implements Listener {
             case "§e§lForward":
                 if(player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
                                 continue;
                             }
                             Location newLocation = new Location(
@@ -703,8 +689,7 @@ public class InventoryClickHandler implements Listener {
             case "§e§lBackwards":
                 if(player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
+                        if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
                                 continue;
                             }
@@ -728,11 +713,10 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lRight":
-                if(player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
                                 continue;
                             }
                             Location newLocation = new Location(
@@ -757,9 +741,8 @@ public class InventoryClickHandler implements Listener {
             case "§e§lLeft":
                 if(player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
                                 continue;
                             }
                             Location newLocation = new Location(
@@ -787,9 +770,8 @@ public class InventoryClickHandler implements Listener {
             case "§e§lUp":
                 if(player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
                                 continue;
                             }
                             Location newLocation = new Location(
@@ -814,9 +796,8 @@ public class InventoryClickHandler implements Listener {
             case "§e§lDown":
                 if(player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
                                 continue;
                             }
                             Location newLocation = new Location(
@@ -844,9 +825,8 @@ public class InventoryClickHandler implements Listener {
             case "§e§lRotate left":
                 if(player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
-                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                        if (entity instanceof ArmorStand armorStand) {
+                            if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
                                 continue;
                             }
                             Location newLocation = new Location(
@@ -871,8 +851,7 @@ public class InventoryClickHandler implements Listener {
             case "§e§lRotate right":
                 if(player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorStand = (ArmorStand) entity;
+                        if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
                                 continue;
                             }
@@ -912,10 +891,9 @@ public class InventoryClickHandler implements Listener {
                                    double bodyRoll, double bodyYaw, double bodyPitch) {
 
         for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-            if (entity instanceof ArmorStand) {
+            if (entity instanceof ArmorStand armorStand) {
 
-                ArmorStand armorStand = (ArmorStand) entity;
-                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
+                if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
                     continue;
                 }
                 // Set general settings

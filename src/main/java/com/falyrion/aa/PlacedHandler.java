@@ -18,14 +18,10 @@ public class PlacedHandler implements Listener {
             if (!AdvancedArmorStandsMain.getInstance().isOwnershipOfPlacedArmorStand()) {
                 return;
             }
+            // only if the config `ownershipOfPlacedArmorStand` is true
             armorstand.getPersistentDataContainer().set(new NamespacedKey(AdvancedArmorStandsMain.getInstance(),
                     AdvancedArmorStandsMain.ARMOR_STAND_OWNER_KEY), PersistentDataType.STRING,
                     event.getPlayer().getUniqueId().toString());
-            String uuidOfPlayer = armorstand.getPersistentDataContainer().get(
-                    new NamespacedKey(AdvancedArmorStandsMain.getInstance(),
-                            AdvancedArmorStandsMain.ARMOR_STAND_OWNER_KEY),
-                    PersistentDataType.STRING);
-            Bukkit.getLogger().info(uuidOfPlayer);
         }
     }
 

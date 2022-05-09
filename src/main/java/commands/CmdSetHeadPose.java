@@ -42,8 +42,7 @@ public class CmdSetHeadPose implements CommandInterface {
                     EulerAngle newPoseEulerAngle = new EulerAngle(arg_roll,arg_yaw,arg_pitch);
 
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
-                        if (entity instanceof ArmorStand) {
-                            ArmorStand armorstand = (ArmorStand) entity;
+                        if (entity instanceof ArmorStand armorstand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorstand, player)) {
                                 continue;
                             }

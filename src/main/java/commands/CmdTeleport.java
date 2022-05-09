@@ -27,9 +27,8 @@ public class CmdTeleport implements CommandInterface {
                 Float i3 = Float.parseFloat(args[3]);
 
                 for (Entity entity : player.getNearbyEntities(0.5, 0.5, 0.5)) {
-                    if (entity instanceof ArmorStand) {
+                    if (entity instanceof ArmorStand armorstand) {
 
-                        ArmorStand armorstand = (ArmorStand) entity;
                         if (!AdvancedArmorStandsMain.getInstance().canChange(armorstand, player)) {
                             continue;
                         }

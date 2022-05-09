@@ -24,8 +24,7 @@ public class CmdSetCustomName implements CommandInterface {
                 String customName = ChatColor.translateAlternateColorCodes('&', String.join(" ", args).replaceFirst("name ", ""));
 
                 for (Entity entity : player.getNearbyEntities(1, 1, 1)) {
-                    if (entity instanceof ArmorStand) {
-                        ArmorStand armorstand = (ArmorStand) entity;
+                    if (entity instanceof ArmorStand armorstand) {
                         if (!AdvancedArmorStandsMain.getInstance().canChange(armorstand, player)) {
                             continue;
                         }
