@@ -4,6 +4,5 @@
 /out
 /AdvancedArmorStands.iml
 
-
-
-
+/target
+.DS_Store
