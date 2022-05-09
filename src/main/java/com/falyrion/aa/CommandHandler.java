@@ -25,7 +25,6 @@ public class CommandHandler implements CommandExecutor {
         return commandsMap.get(name);
     }
 
-
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String commandLabel, String[] arguments) {
 

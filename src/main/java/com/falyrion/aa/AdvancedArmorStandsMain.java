@@ -35,7 +35,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
     private GUI gui;
 
     public String aaVersion = "v.1.18.0.0";
-    public String apiVersion = "1.18+";
+    public String apiVersion = "1.17+";
 
     FileConfiguration config = getConfig();
 
@@ -173,24 +173,21 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
     public void playSoundClick(Player player) {
         try {
             player.playSound(player.getLocation(), Sound.BLOCK_COMPARATOR_CLICK, 1, 1);
-        } catch (NoSuchFieldError exc) {
-        }
+        } catch (NoSuchFieldError exc) { }
 
     }
 
     public void playSoundBass(Player player) {
         try {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-        } catch (NoSuchFieldError exc) {
-        }
+        } catch (NoSuchFieldError exc) { }
 
     }
 
     public void playSoundTeleport(Player player) {
         try {
             player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
-        } catch (NoSuchFieldError exc) {
-        }
+        } catch (NoSuchFieldError exc) { }
 
     }
 
