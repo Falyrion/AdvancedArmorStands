@@ -1,0 +1,35 @@
+name: AdvancedArmorStands
+author: Falyrion
+description: Easy editing of armor stands and player heads
+version: 1.18.0.0
+api-version: 1.17
+
+main: com.falyrion.aa.AdvancedArmorStandsMain
+
+commands:
+  aa:
+    usage: /aa
+    description: Use without arguments to show the Advanced Armorstands Menu; use '/aa help' to see all further usable arguments
+
+permissions:
+  aa.edit:
+    default: true
+    description: Enables/ Disables access to the all commands of this plugin that allow modification of armor stands.
+  aa.head:
+    default: true
+    description: Enables/ Disables access to get player heads with the build in command of this plugin.
+  aa.visible:
+    default: true
+    description: Enables/ Disables ability to make amor stands visible/ invisible.
+  aa.names:
+    default: true
+    description: Enables/ Disables ability to give amor stands names.
+  aa.tp:
+    default: true
+    description: Enables/ Disables the ability to move armorstands around, both with commands or the Menu.
+  aa.clone:
+    default: true
+    description: Enables/ Disables the ability to clone armorstands with existing settings. Players in creative mode will also copy equipment.
+  aa.adminbroadcast:
+    default: false
+    description: Shows admin broadcast to all players with this permission in chat (for example for head give commands). By default the server will broadcast such information to operators anyways, so you can keep this node disabled.

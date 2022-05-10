@@ -40,6 +40,8 @@ Just stand next to the armor stand you want to modify and type the command `/aa`
 
 This plugin was made for Spigot v.1.17 and later versions.
 
+The lastest Version `1.18.0` of this plugin requires java `17` or higher
+
 <a name="commands"></a>
 # Commands and Permissions
 
@@ -84,10 +86,12 @@ This plugin was made for Spigot v.1.17 and later versions.
 
 The config.yml-file contains configuration options for the plugin. To apply any changes, save the file and reload or restart your server.
 
-| Config-Path      | Default value | Description                                                                 |
-| ---------------- | ------------- | --------------------------------------------------------------------------- |
-| spawnWithArms    | true          | Defines wheather new armor stands spawn with arms already turned on or not. |
-| commandEditRange | 100           | Defines the max range in which commands can effect armor stands             |
+| Config-Path      | Default value | Description                                                                  |
+|------------------| ------------- |------------------------------------------------------------------------------|
+| spawnWithArms    | true          | Defines wheather new armor stands spawn with arms already turned on or not. If this config is set to `true`, then the value of the next config `placeWithArms`  will be ignored   |
+| placeWithArms    | true          | Defines wheather new armor stands placed by players with arms already turned on or not. This value is ignored when `spawnWithArms` is set to `true` |
+| ownershipOfPlacedArms | false           | Defines if only the player who `placed` the armor stand can modify its poses              |
+| commandEditRange | 100           | Defines the max range in which commands can effect armor stands              |
 
 <a name="language"></a>
 # Languages
