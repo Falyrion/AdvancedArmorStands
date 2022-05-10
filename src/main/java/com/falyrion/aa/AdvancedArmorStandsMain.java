@@ -232,6 +232,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
             }
         } else {
             config.set("placeWithArms", true);
+            Bukkit.getServer().getPluginManager().registerEvents(new PlacedHandler(), this);
         }
 
         if (config.contains("commandEditRange")) {
