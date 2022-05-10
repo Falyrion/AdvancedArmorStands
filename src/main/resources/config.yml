@@ -9,7 +9,7 @@
 #   then the value of the next config `placeWithArms`  will be ignored
 spawnWithArms: true
 
-# If true, armor stands will be placed with arms.
+# If true, armor stands will be placed (by players) with arms.
 placeWithArms: true
 
 # If true, only the player who placed the armor stands can modify them. It applies only on armor stands that are placed

@@ -89,8 +89,8 @@ The config.yml-file contains configuration options for the plugin. To apply any 
 | Config-Path      | Default value | Description                                                                  |
 |------------------| ------------- |------------------------------------------------------------------------------|
 | spawnWithArms    | true          | Defines wheather new armor stands spawn with arms already turned on or not. If this config is set to `true`, then the value of the next config `placeWithArms`  will be ignored   |
-| placeWithArms    | true          | Defines wheather new armor stands placed with arms already turned on or not. This value is ignored when `spawnWithArms` is set to `true` |
-| ownershipOfPlacedArms | false           | Defines if only the player who `placed` the armor stand can modify its pose              |
+| placeWithArms    | true          | Defines wheather new armor stands placed by players with arms already turned on or not. This value is ignored when `spawnWithArms` is set to `true` |
+| ownershipOfPlacedArms | false           | Defines if only the player who `placed` the armor stand can modify its poses              |
 | commandEditRange | 100           | Defines the max range in which commands can effect armor stands              |
 
 <a name="language"></a>

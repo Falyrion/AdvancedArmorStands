@@ -220,7 +220,6 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         }
 
         if (config.contains("ownershipOfPlacedArmorStand")) {
-            // Enable only when config-boolean set to true
             setOwnershipOfPlacedArmorStand(config.getBoolean("ownershipOfPlacedArmorStand"));
         } else {
             config.set("ownershipOfPlacedArmorStand", false);
@@ -255,13 +254,13 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
 
     /**
-     * Check if the player can change the armor Stand. It checks if the ownership config is enabled and then
-     * if the armor stand has `armor-stand-owner` key and then if the uuid of the player (sender) is equal to the uuid of
-     * the player who placed the armor stand
+     * It checks if the player can change the armor Stand. It checks if the ownership configuration is enabled, then
+     * if the armor stand has `armor-stand-owner` key, and last if the uuid of the player (sender) is equal
+     * to the uuid of the player who placed the armor stand.
      *
      * @param armorStand the armor stand to change
      * @param player     the player who triggered the action
-     * @return true if the player can change the armor Stand. otherwise false
+     * @return true if the player is the owner or the armor stand has no owner. otherwise false
      */
     public boolean canChange(ArmorStand armorStand, Player player) {
         if (AdvancedArmorStandsMain.getInstance().isOwnershipOfPlacedArmorStand()) {

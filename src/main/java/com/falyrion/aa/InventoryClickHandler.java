@@ -2,7 +2,6 @@ package com.falyrion.aa;
 
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -661,7 +660,7 @@ public class InventoryClickHandler implements Listener {
             // Nav Cross
 
             case "§e§lForward":
-                if(player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -687,7 +686,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lBackwards":
-                if(player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
@@ -739,7 +738,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lLeft":
-                if(player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -768,7 +767,7 @@ public class InventoryClickHandler implements Listener {
             // Move up and down
 
             case "§e§lUp":
-                if(player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -794,7 +793,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lDown":
-                if(player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -823,7 +822,7 @@ public class InventoryClickHandler implements Listener {
             // Rotate
 
             case "§e§lRotate left":
-                if(player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -849,7 +848,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lRotate right":
-                if(player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.tp")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
@@ -961,120 +960,96 @@ public class InventoryClickHandler implements Listener {
     private void handleEventPresetPoseMenu(String itemName, Player player) {
 
         switch (itemName) {
-            case "§e§lDefault 1":
+            case "§e§lDefault 1" -> {
                 setArmorStandPose(player, 345, 0, 10, 350, 0, 350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lDefault 2":
+            }
+            case "§e§lDefault 2" -> {
                 setArmorStandPose(player, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lWalking 1":
+            }
+            case "§e§lWalking 1" -> {
                 setArmorStandPose(player, 345, 0, 10, 350, 0, 350, 340, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lWalking 2":
+            }
+            case "§e§lWalking 2" -> {
                 setArmorStandPose(player, 300, 40, 350, 20, 0, 350, 10, 0, 0, 350, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lSitting":
+            }
+            case "§e§lSitting" -> {
                 setArmorStandPose(player, 345, 0, 10, 350, 0, 350, 280, 20, 0, 280, 340, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lWaving":
+            }
+            case "§e§lWaving" -> {
                 setArmorStandPose(player, 220, 20, 0, 350, 0, 350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lGreeting 1":
+            }
+            case "§e§lGreeting 1" -> {
                 setArmorStandPose(player, 260, 20, 0, 260, 340, 0, 340, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lGreeting 2":
+            }
+            case "§e§lGreeting 2" -> {
                 setArmorStandPose(player, 240, 50, 0, 240, 320, 0, 10, 0, 0, 350, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lGreeting 3":
+            }
+            case "§e§lGreeting 3" -> {
                 setArmorStandPose(player, 260, 10, 0, 260, 350, 0, 320, 0, 0, 10, 0, 0, 340, 0, 350, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lCheering 1":
+            }
+            case "§e§lCheering 1" -> {
                 setArmorStandPose(player, 220, 20, 0, 220, 340, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lCheering 2":
+            }
+            case "§e§lCheering 2" -> {
                 setArmorStandPose(player, 250, 60, 0, 20, 10, 0, 10, 0, 0, 350, 0, 0, 340, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lBuilder":
+            }
+            case "§e§lBuilder" -> {
                 setArmorStandPose(player, 340, 320, 0, 320, 40, 0, 340, 0, 0, 20, 0, 0, 20, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lSword Fighter":
+            }
+            case "§e§lSword Fighter" -> {
                 setArmorStandPose(player, 300, 320, 0, 300, 40, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lFencing":
+            }
+            case "§e§lFencing" -> {
                 setArmorStandPose(player, 290, 0, 270, 20, 0, 230, 0, 30, 0, 340, 0, 340, 20, 30, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lArcher":
+            }
+            case "§e§lArcher" -> {
                 setArmorStandPose(player, 270, 350, 0, 280, 50, 0, 340, 0, 10, 20, 0, 350, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lPresenting Item":
+            }
+            case "§e§lPresenting Item" -> {
                 setArmorStandPose(player, 280, 330, 0, 10, 0, 350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lHolding Item above Head":
+            }
+            case "§e§lHolding Item above Head" -> {
                 setArmorStandPose(player, 250, 320, 0, 250, 35, 0, 10, 0, 0, 350, 0, 0, 340, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lPointing right up":
+            }
+            case "§e§lPointing right up" -> {
                 setArmorStandPose(player, 260, 60, 0, 20, 20, 0, 10, 340, 0, 10, 30, 0, 0, 70, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lFisherman":
+            }
+            case "§e§lFisherman" -> {
                 setArmorStandPose(player, 300, 320, 0, 300, 40, 0, 280, 20, 0, 280, 340, 0, 0, 0, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lDancing 1":
+            }
+            case "§e§lDancing 1" -> {
                 setArmorStandPose(player, 14, 0, 110, 20, 0, 250, 15, 30, 0, 330, 0, 110, 350, 20, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lDancing 2":
+            }
+            case "§e§lDancing 2" -> {
                 setArmorStandPose(player, 14, 0, 110, 20, 0, 250, 250, 330, 0, 15, 330, 0, 350, 350, 0, 0, 0, 0);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
-
-            case "§e§lHow to?":
-                AdvancedArmorStandsMain.getInstance().playSoundBass(player);
-                break;
-
-            case "§e§lBack to Main Menu":
+            }
+            case "§e§lHow to?" -> AdvancedArmorStandsMain.getInstance().playSoundBass(player);
+            case "§e§lBack to Main Menu" -> {
                 player.closeInventory();
                 AdvancedArmorStandsMain.getInstance().showMenu(player, 1);
                 AdvancedArmorStandsMain.getInstance().playSoundClick(player);
-                break;
+            }
         }
     }
 

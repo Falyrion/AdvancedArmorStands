@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
-
 public class CommandHandler implements CommandExecutor {
 
     private static HashMap<String, CommandInterface> commandsMap = new HashMap<String, CommandInterface>();
@@ -32,26 +31,19 @@ public class CommandHandler implements CommandExecutor {
             if (arguments.length > 0) {
                 if (doesCommandExist(arguments[0])) {
                     getCommandExecutor(arguments[0]).onCommand(commandSender, command, commandLabel, arguments);
-                    return true;
-
                 } else {
-
                     Player player = (Player) commandSender;
                     String message = AdvancedArmorStandsMain.getInstance().getMessageString("command_not_exist", player.getLocale());
                     player.sendMessage(org.bukkit.ChatColor.RED + message);
-
-                    return true;
                 }
 
             } else {
                 getCommandExecutor("aa").onCommand(commandSender, command, commandLabel, arguments);
-                return true;
             }
 
         } else {
             commandSender.sendMessage("[AdvancedArmorStands] Commands can only be issued as a player in game");
-            return true;
         }
-
+        return true;
     }
 }
