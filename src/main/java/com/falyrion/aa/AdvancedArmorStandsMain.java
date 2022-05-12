@@ -242,7 +242,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         Boolean placeWithArms = config.contains("placeWithArms") ? config.getBoolean("placeWithArms") : true;
         Boolean ownershipOfPlacedArmorStand =  config.contains("ownershipOfPlacedArmorStand") ?
                 config.getBoolean("ownershipOfPlacedArmorStand") : false;
-        Integer commandEditRange = config.contains("commandEditRange") ? config.getInt("commandEditRange") : 100;
+        Float commandEditRange = config.contains("commandEditRange") ? config.getInt("commandEditRange") : 100f;
 
         outConfig.options().header(
                 "######################################################################################################################" +
@@ -272,7 +272,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
                 spawnArmors,
                 placeWithArms,
                 ownershipOfPlacedArmorStand,
-                (float) commandEditRange
+                commandEditRange
         );
 
         try {
