@@ -246,7 +246,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
         outConfig.options().header(
                 "######################################################################################################################" +
-                "\n AdvancedArmorStands Config" +
+                "\n AdvancedArmorStands Config \n" +
                 "\n Please do not delete anything in this file!" +
                 "\n For help please visit: https://github.com/Falyrion/AdvancedArmorStands" +
                 "\n######################################################################################################################" +
