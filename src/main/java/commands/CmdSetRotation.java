@@ -24,7 +24,7 @@ public class CmdSetRotation implements CommandInterface {
 
                 Float distance = Float.parseFloat(args[3]);
 
-                if (distance <= AdvancedArmorStandsMain.getInstance().editRange) {
+                if (distance <= AdvancedArmorStandsMain.getInstance().getSettings().commandEditRange()) {
 
                     Integer i4 = Integer.parseInt(args[2]);
                     if (i4 == 45 || i4 == 90 || i4 == 135 || i4 == 180 || i4 == 225 || i4 == 270 || i4 == 315 || i4 == 360) {
@@ -82,10 +82,10 @@ public class CmdSetRotation implements CommandInterface {
 
                 }
 
-                if (distance > AdvancedArmorStandsMain.getInstance().editRange) {
+                if (distance > AdvancedArmorStandsMain.getInstance().getSettings().commandEditRange()) {
 
                     String message = AdvancedArmorStandsMain.getInstance().getMessageString("range_error", player.getLocale());
-                    message = String.format(message, AdvancedArmorStandsMain.getInstance().editRange);
+                    message = String.format(message, AdvancedArmorStandsMain.getInstance().getSettings().commandEditRange());
                     player.sendMessage(ChatColor.RED + message);
 
                 }

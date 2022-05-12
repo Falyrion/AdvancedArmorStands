@@ -28,8 +28,6 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         return instance;
     }
 
-    public float editRange = 100f;
-    private boolean ownershipOfPlacedArmorStand = false;
     public static final String ARMOR_STAND_OWNER_KEY = "aa-owner";
 
     private GUI gui;
@@ -37,9 +35,13 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
     public String aaVersion = "v.1.18.0.0";
     public String apiVersion = "1.17+";
 
-    FileConfiguration config = getConfig();
+    private Settings settings;
 
     private final Logger log = Bukkit.getLogger();
+
+    public Settings getSettings() {
+        return settings;
+    }
 
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Handling commands
@@ -74,14 +76,6 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         commandHandler.registerCommand("give", new CmdGiveArmorstand());
 
         getCommand("aa").setExecutor(commandHandler);
-    }
-
-    public boolean isOwnershipOfPlacedArmorStand() {
-        return ownershipOfPlacedArmorStand;
-    }
-
-    public void setOwnershipOfPlacedArmorStand(boolean ownershipOfPlacedArmorStand) {
-        this.ownershipOfPlacedArmorStand = ownershipOfPlacedArmorStand;
     }
 
     public interface CommandInterface {
@@ -166,8 +160,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     }
 
-
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Sounds
 
     public void playSoundClick(Player player) {
@@ -205,8 +198,8 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         // Call function to register commands
         this.registerCommands();
 
-        // Initiate config file
-        this.saveDefaultConfig();
+        // load config file
+        this.loadConfig();
 
         // Initiate language files
         createLanguageConfig();
@@ -214,31 +207,12 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         // Enable Event-Listener
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClickHandler(), this);
 
-        if (config.getBoolean("spawnWithArms")) {
+        if (settings.spawnWithArms()) {
             // Enable only when config-boolean set to true
             Bukkit.getServer().getPluginManager().registerEvents(new SpawnHandler(), this);
         }
-
-        if (config.contains("ownershipOfPlacedArmorStand")) {
-            setOwnershipOfPlacedArmorStand(config.getBoolean("ownershipOfPlacedArmorStand"));
-        } else {
-            config.set("ownershipOfPlacedArmorStand", false);
-        }
-
-        if (config.contains("placeWithArms")) {
-            if (config.getBoolean("placeWithArms")) {
-                // Enable only when config-boolean set to true
-                Bukkit.getServer().getPluginManager().registerEvents(new PlacedHandler(), this);
-            }
-        } else {
-            config.set("placeWithArms", true);
+        if (settings.placeWithArms() || settings.ownershipOfPlacedArmorStand()) {
             Bukkit.getServer().getPluginManager().registerEvents(new PlacedHandler(), this);
-        }
-
-        if (config.contains("commandEditRange")) {
-            editRange = (float) config.getDouble("commandEditRange");
-        } else {
-            config.set("commandEditRange", 100);
         }
 
         // Enable metrics
@@ -253,6 +227,62 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         log.info("[AdvancedArmorStands] disabled");
     }
 
+    /**
+     * Load and rewrite the config file on server start
+     */
+    private void loadConfig() {
+        // read configuration settings (note defaults)
+        this.getDataFolder().mkdirs();
+        File configFile = new File(this.getDataFolder().getPath() + File.separatorChar + "config.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+        FileConfiguration outConfig = new YamlConfiguration();
+
+        // Get current values
+        Boolean spawnArmors = config.contains("spawnWithArms") ? config.getBoolean("spawnWithArms") : true;
+        Boolean placeWithArms = config.contains("placeWithArms") ? config.getBoolean("placeWithArms") : true;
+        Boolean ownershipOfPlacedArmorStand =  config.contains("ownershipOfPlacedArmorStand") ?
+                config.getBoolean("ownershipOfPlacedArmorStand") : false;
+        Integer commandEditRange = config.contains("commandEditRange") ? config.getInt("commandEditRange") : 100;
+
+        outConfig.options().header(
+                "######################################################################################################################" +
+                "\n AdvancedArmorStands Config" +
+                "\n Please do not delete anything in this file!" +
+                "\n For help please visit: https://github.com/Falyrion/AdvancedArmorStands" +
+                "\n######################################################################################################################" +
+                "\n \nspawnWithArms: " +
+                "\n# If true, armor stands will spawn with arms. If this config is set to `true`, then the value of the next config `placeWithArms`  will be ignored" +
+                "\n# default spawnWithArms is true" +
+                "\n \nplaceWithArms:" +
+                "\n# If true, armor stands will be placed (by players) with arms." +
+                "\n# default  placeWithArms is true" +
+                "\n \nownershipOfPlacedArmorStand:" +
+                "\n# If true, only the player who placed the armor stands can modify them. It applies only on armor stands that are placed by a player while the ownershipOfPlacedArms is true" +
+                "\n# default ownershipOfPlacedArmorStand is false" +
+                "\n \ncommandEditRange" +
+                "\n# The max range (blocks) in which armor stands can get effected by the plugins commands" +
+                "\n# default commandEditRange is 100" +
+                "\n");
+        outConfig.set("spawnWithArms", spawnArmors);
+        outConfig.set("placeWithArms", placeWithArms);
+        outConfig.set("ownershipOfPlacedArmorStand", ownershipOfPlacedArmorStand);
+        outConfig.set("commandEditRange", commandEditRange);
+
+        settings = new Settings(
+                spawnArmors,
+                placeWithArms,
+                ownershipOfPlacedArmorStand,
+                (float) commandEditRange
+        );
+
+        try {
+            outConfig.save(configFile);
+        } catch(IOException  e) {
+            log.warning("[AdvancedArmorStands] Could not load config file");
+            log.warning("[AdvancedArmorStands] Please delete the folder AdvancedArmorStands inside your plugins folder and restart or reload the server.");
+            e.printStackTrace();
+        }
+    }
 
     /**
      * It checks if the player can change the armor Stand. It checks if the ownership configuration is enabled, then
@@ -264,7 +294,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
      * @return true if the player is the owner or the armor stand has no owner. otherwise false
      */
     public boolean canChange(ArmorStand armorStand, Player player) {
-        if (AdvancedArmorStandsMain.getInstance().isOwnershipOfPlacedArmorStand()) {
+        if (getSettings().ownershipOfPlacedArmorStand()) {
             if (hasOwnershipPersistentData(armorStand)) {
                 String extractedUUIDOfOwner = getOwnershipUUIDFromPersistentData(armorStand);
                 if (!extractedUUIDOfOwner.equals(player.getUniqueId().toString())) {
