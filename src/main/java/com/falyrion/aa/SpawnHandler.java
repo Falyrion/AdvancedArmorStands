@@ -16,7 +16,7 @@ public class SpawnHandler implements Listener {
 
     @EventHandler
     public void onArmorStandSpawn(EntitySpawnEvent event) {
-        if (event.getEntity() instanceof  ArmorStand armorstand) {
+        if (event.getEntity() instanceof ArmorStand armorstand) {
             armorstand.setArms(true);
         }
     }

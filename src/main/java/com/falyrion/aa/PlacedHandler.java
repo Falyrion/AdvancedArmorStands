@@ -1,6 +1,5 @@
 package com.falyrion.aa;
 
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
@@ -13,8 +12,8 @@ public class PlacedHandler implements Listener {
     @EventHandler
     public void onArmorStandPlace(EntityPlaceEvent event) {
         if (event.getEntity() instanceof ArmorStand armorstand) {
-            armorstand.setArms(true);
-            if (!AdvancedArmorStandsMain.getInstance().isOwnershipOfPlacedArmorStand()) {
+            armorstand.setArms(AdvancedArmorStandsMain.getInstance().getSettings().placeWithArms());
+            if (!AdvancedArmorStandsMain.getInstance().getSettings().ownershipOfPlacedArmorStand()) {
                 return;
             }
             // only if the config `ownershipOfPlacedArmorStand` is true
