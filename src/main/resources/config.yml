@@ -17,7 +17,7 @@
 # # If true, only the player who placed the armor stands can modify them. It applies only on armor stands that are placed by a player while the ownershipOfPlacedArms is true
 # # default ownershipOfPlacedArmorStand is false
 #
-# commandEditRange
+# commandEditRange:
 # # The max range (blocks) in which armor stands can get effected by the plugins commands
 # # default commandEditRange is 100
 

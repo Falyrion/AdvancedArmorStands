@@ -259,7 +259,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
                 "\n \nownershipOfPlacedArmorStand:" +
                 "\n# If true, only the player who placed the armor stands can modify them. It applies only on armor stands that are placed by a player while the ownershipOfPlacedArms is true" +
                 "\n# default ownershipOfPlacedArmorStand is false" +
-                "\n \ncommandEditRange" +
+                "\n \ncommandEditRange:" +
                 "\n# The max range (blocks) in which armor stands can get effected by the plugins commands" +
                 "\n# default commandEditRange is 100" +
                 "\n");
