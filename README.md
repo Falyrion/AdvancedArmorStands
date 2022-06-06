@@ -2,7 +2,7 @@
 
 <p align="center">
     <!-- Java -->
-    <a href="" target="blank"><img align="center" src="https://img.shields.io/badge/Made%20with-Java-orange?style=for-the-badge&logo=Java" alt="falyrion"/></a>
+    <a target="blank"><img align="center" src="https://img.shields.io/badge/Made%20with-Java-orange?style=for-the-badge&logo=Java" alt="falyrion"/></a>
     <!-- Spigot -->
     <a href="https://www.spigotmc.org/" target="blank"><img align="center" src="https://img.shields.io/badge/Made%20for-spigot-FF6F00?style=for-the-badge" alt="falyrion"/></a>
     <!-- Downloads -->
