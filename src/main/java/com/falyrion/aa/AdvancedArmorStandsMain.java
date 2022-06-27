@@ -1,6 +1,8 @@
 package com.falyrion.aa;
 
 import commands.*;
+import event_listener.PlacedHandler;
+import event_listener.SpawnHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -22,27 +24,28 @@ import java.util.logging.Logger;
 
 public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
+    /**
+     * Remove Settings-class and put it in the MainClass
+     * Some Refactoring
+     * Updated solution for config so it will not overwrite each time the server restarts
+     *
+     */
+
     private static AdvancedArmorStandsMain instance;
 
     public static AdvancedArmorStandsMain getInstance() {
         return instance;
     }
 
-    public float editRange = 100f;
-    private boolean ownershipOfPlacedArmorStand = false;
-    public static final String ARMOR_STAND_OWNER_KEY = "aa-owner";
-
     private GUI gui;
 
-    public String aaVersion = "v.1.18.0.0";
+    public String aaVersion = "v.1.18.1.0";  // Don't forget to update version in plugin.yml and config.yml too!
     public String apiVersion = "1.17+";
-
-    FileConfiguration config = getConfig();
+    public static final String ARMOR_STAND_OWNER_KEY = "aa-owner";
 
     private final Logger log = Bukkit.getLogger();
 
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // Handling commands
+    // Handling commands -----------------------------------------------------------------------------------------------
 
     private void registerCommands() {
         CommandHandler commandHandler = new CommandHandler();
@@ -76,14 +79,6 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         getCommand("aa").setExecutor(commandHandler);
     }
 
-    public boolean isOwnershipOfPlacedArmorStand() {
-        return ownershipOfPlacedArmorStand;
-    }
-
-    public void setOwnershipOfPlacedArmorStand(boolean ownershipOfPlacedArmorStand) {
-        this.ownershipOfPlacedArmorStand = ownershipOfPlacedArmorStand;
-    }
-
     public interface CommandInterface {
         boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args);
     }
@@ -92,8 +87,97 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         gui.openMenu(player, menuID);
     }
 
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // Language file
+    // Config and Data -------------------------------------------------------------------------------------------------
+
+    /**
+     * This record contains settings-data that can be looked up by other methods of this plugin
+     */
+    public record Settings(int spawnWithArms,
+                           boolean ownershipOfPlacedArmorStand,
+                           float commandEditRange) { }
+
+    private Settings settings;
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    /**
+     * Update config file if outdated. Take over settings from old file to the new file.
+     */
+    private void updateConfig() {
+        // Log
+        log.info("[AdvancedArmorStands] Config.yml is outdated. Updating it now...");
+
+        // Get outdated config file
+        FileConfiguration outdatedConfigFile = this.getConfig();
+
+        // Save values from outdated config
+        int spawnWithArms = 1;
+        boolean ownershipOfPlacedArmorStand = true;
+        double commandEditRange = 100;
+
+        if (outdatedConfigFile.contains("spawnWithArms")) {
+            // -> Check for type required as this value was of type string in older versions
+            if (outdatedConfigFile.get("spawnWithArms") instanceof Integer) {
+                spawnWithArms = outdatedConfigFile.getInt("spawnWithArms");
+            }
+        }
+
+        if (outdatedConfigFile.contains("ownershipOfPlacedArmorStand")) {
+            ownershipOfPlacedArmorStand = outdatedConfigFile.getBoolean("ownershipOfPlacedArmorStand");
+        }
+
+        if (outdatedConfigFile.contains("commandEditRange")) {
+            commandEditRange = outdatedConfigFile.getDouble("commandEditRange");
+        }
+
+        // Delete old config-file
+        File oldConfig = new File(getDataFolder(), "config.yml");
+        boolean deleteSuccess = oldConfig.delete();
+        if (!deleteSuccess) {
+            log.warning("[AdvancedArmorStands] Config.yml is outdated. Please delete the config file and restart the server.");
+        }
+
+        // Create new config file from default
+        this.saveDefaultConfig();
+        reloadConfig();
+
+        // Overwrite values with saved values
+        this.getConfig().set("spawnWithArms", spawnWithArms);
+        this.getConfig().set("ownershipOfPlacedArmorStand", ownershipOfPlacedArmorStand);
+        this.getConfig().set("commandEditRange", commandEditRange);
+
+        this.saveConfig();
+    }
+
+    /**
+     * Load config file on server start. If config is outdated call method updateConfig() to update it.
+     */
+    private void loadConfig() {
+        // Check if config exists. If not create it.
+        File configFile = new File(this.getDataFolder(), "config.yml");
+        if (!configFile.exists()) {
+            log.warning("[AdvancedArmorStands] Config does not exist. Creating it.");
+            // Create default config file
+            this.saveDefaultConfig();
+        }
+
+        // Check version of config. If outdated overwrite it.
+        if (this.getConfig().getString("version") == null || !this.getConfig().getString("version").equals(aaVersion)) {
+            updateConfig();
+        }
+
+        // Create settings-variable from config settings
+        settings = new Settings(
+                this.getConfig().getInt("spawnWithArms"),
+                this.getConfig().getBoolean("ownershipOfPlacedArmorStand"),
+                (float) this.getConfig().getDouble("commandEditRange")
+        );
+    }
+
+
+    // Language file ---------------------------------------------------------------------------------------------------
 
     private File languageConfigFile;
     private FileConfiguration languageConfig;
@@ -166,93 +250,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     }
 
-
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // Sounds
-
-    public void playSoundClick(Player player) {
-        try {
-            player.playSound(player.getLocation(), Sound.BLOCK_COMPARATOR_CLICK, 1, 1);
-        } catch (NoSuchFieldError exc) { }
-
-    }
-
-    public void playSoundBass(Player player) {
-        try {
-            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-        } catch (NoSuchFieldError exc) { }
-
-    }
-
-    public void playSoundTeleport(Player player) {
-        try {
-            player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
-        } catch (NoSuchFieldError exc) { }
-
-    }
-
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // Enable, Disable
-
-    @Override
-    public void onEnable() {
-
-        // Create GUI class
-        gui = new GUI();
-
-        instance = this;
-
-        // Call function to register commands
-        this.registerCommands();
-
-        // Initiate config file
-        this.saveDefaultConfig();
-
-        // Initiate language files
-        createLanguageConfig();
-
-        // Enable Event-Listener
-        Bukkit.getServer().getPluginManager().registerEvents(new InventoryClickHandler(), this);
-
-        if (config.getBoolean("spawnWithArms")) {
-            // Enable only when config-boolean set to true
-            Bukkit.getServer().getPluginManager().registerEvents(new SpawnHandler(), this);
-        }
-
-        if (config.contains("ownershipOfPlacedArmorStand")) {
-            setOwnershipOfPlacedArmorStand(config.getBoolean("ownershipOfPlacedArmorStand"));
-        } else {
-            config.set("ownershipOfPlacedArmorStand", false);
-        }
-
-        if (config.contains("placeWithArms")) {
-            if (config.getBoolean("placeWithArms")) {
-                // Enable only when config-boolean set to true
-                Bukkit.getServer().getPluginManager().registerEvents(new PlacedHandler(), this);
-            }
-        } else {
-            config.set("placeWithArms", true);
-            Bukkit.getServer().getPluginManager().registerEvents(new PlacedHandler(), this);
-        }
-
-        if (config.contains("commandEditRange")) {
-            editRange = (float) config.getDouble("commandEditRange");
-        } else {
-            config.set("commandEditRange", 100);
-        }
-
-        // Enable metrics
-        Metrics metrics = new Metrics(this, 13743);
-
-        // Debug
-        log.info("[AdvancedArmorStands] Version " + aaVersion + " (for bukkit " + apiVersion + ") enabled");
-    }
-
-    @Override
-    public void onDisable() {
-        log.info("[AdvancedArmorStands] disabled");
-    }
-
+    // Ownership -------------------------------------------------------------------------------------------------------
 
     /**
      * It checks if the player can change the armor Stand. It checks if the ownership configuration is enabled, then
@@ -264,7 +262,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
      * @return true if the player is the owner or the armor stand has no owner. otherwise false
      */
     public boolean canChange(ArmorStand armorStand, Player player) {
-        if (AdvancedArmorStandsMain.getInstance().isOwnershipOfPlacedArmorStand()) {
+        if (getSettings().ownershipOfPlacedArmorStand()) {
             if (hasOwnershipPersistentData(armorStand)) {
                 String extractedUUIDOfOwner = getOwnershipUUIDFromPersistentData(armorStand);
                 if (!extractedUUIDOfOwner.equals(player.getUniqueId().toString())) {
@@ -288,6 +286,76 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         return armorStand.getPersistentDataContainer()
                 .get(new NamespacedKey(AdvancedArmorStandsMain.getInstance(), ARMOR_STAND_OWNER_KEY),
                         PersistentDataType.STRING);
+    }
+
+    // Sounds ----------------------------------------------------------------------------------------------------------
+
+    public void playSoundClick(Player player) {
+        try {
+            player.playSound(player.getLocation(), Sound.BLOCK_COMPARATOR_CLICK, 1, 1);
+        } catch (NoSuchFieldError exc) { }
+
+    }
+
+    public void playSoundBass(Player player) {
+        try {
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+        } catch (NoSuchFieldError exc) { }
+
+    }
+
+    public void playSoundTeleport(Player player) {
+        try {
+            player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
+        } catch (NoSuchFieldError exc) { }
+
+    }
+
+    // Enable, Disable -------------------------------------------------------------------------------------------------
+
+    @Override
+    public void onEnable() {
+
+        // Create GUI class
+        gui = new GUI();
+
+        instance = this;
+
+        // Call function to register commands
+        this.registerCommands();
+
+        // load config file
+        this.loadConfig();
+
+        // Initiate language files
+        createLanguageConfig();
+
+        // Enable Event-Listener (InventoryClick)
+        Bukkit.getServer().getPluginManager().registerEvents(new InventoryClickHandler(), this);
+
+        // Check spawnWithArms-settings and enable Event-Listener (SpawnHandler)
+        if (settings.spawnWithArms() == 1) {
+            // Enable event handler -> All spawned armor stands will have arms
+            Bukkit.getServer().getPluginManager().registerEvents(new SpawnHandler(), this);
+        } else if (settings.spawnWithArms() == 2) {
+            // Enable event handler -> Only armor stands placed by players will have arms
+            Bukkit.getServer().getPluginManager().registerEvents(new PlacedHandler(), this);
+        }
+
+        if (settings.ownershipOfPlacedArmorStand) {
+            Bukkit.getServer().getPluginManager().registerEvents(new PlacedHandler(), this);
+        }
+
+        // Enable metrics
+        Metrics metrics = new Metrics(this, 13743);
+
+        // Debug
+        log.info("[AdvancedArmorStands] Version " + aaVersion + " (for bukkit " + apiVersion + ") enabled");
+    }
+
+    @Override
+    public void onDisable() {
+        log.info("[AdvancedArmorStands] disabled");
     }
 
 }

@@ -1,20 +1,22 @@
 # ######################################################################################################################
 # AdvancedArmorStands Config
+# For help or contributions please visit: https://github.com/Falyrion/AdvancedArmorStands
 #
-# Please do not delete anything in this file!
-# For help please visit: https://github.com/Falyrion/AdvancedArmorStands
+# DO NOT MODIFY THE VERSION
+version: v.1.18.1.0
 # ######################################################################################################################
-
-# If true, armor stands will spawn with arms. If this config is set to `true`,
-#   then the value of the next config `placeWithArms`  will be ignored
-spawnWithArms: true
-
-# If true, armor stands will be placed (by players) with arms.
-placeWithArms: true
-
-# If true, only the player who placed the armor stands can modify them. It applies only on armor stands that are placed
-#  by a player while the ownershipOfPlacedArms is true
+#
+spawnWithArms: 1
+# - If 0, armor stands will NOT spawn with arms.
+# - If 1, ALL armor stands will spawn with arms.
+# - If 2, only armor stands placed by a player will spawn with arms.
+# - Default: 1
+#
 ownershipOfPlacedArmorStand: false
-
-# The max range (blocks) in which armor stands can get effected by the plugins commands
+# - If true, only the player who placed the armor stands can modify them via commands or the menu.
+# - Armor stands that are spawned by other ways will not be effected by this setting and can be modified by everyone.
+# - Default: false
+#
 commandEditRange: 100
+# - The max range (blocks) in which armor stands can get effected by the plugins commands
+# - Default: 100

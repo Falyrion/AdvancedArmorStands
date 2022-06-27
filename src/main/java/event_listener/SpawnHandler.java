@@ -1,4 +1,4 @@
-package com.falyrion.aa;
+package event_listener;
 
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
@@ -16,7 +16,7 @@ public class SpawnHandler implements Listener {
 
     @EventHandler
     public void onArmorStandSpawn(EntitySpawnEvent event) {
-        if (event.getEntity() instanceof  ArmorStand armorstand) {
+        if (event.getEntity() instanceof ArmorStand armorstand) {
             armorstand.setArms(true);
         }
     }
