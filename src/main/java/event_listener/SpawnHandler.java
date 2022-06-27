@@ -1,4 +1,4 @@
-package com.falyrion.aa;
+package event_listener;
 
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
