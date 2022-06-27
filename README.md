@@ -6,7 +6,7 @@
     <!-- Spigot -->
     <a href="https://www.spigotmc.org/" target="blank"><img align="center" src="https://img.shields.io/badge/Made%20for-spigot-FF6F00?style=for-the-badge" alt="falyrion"/></a>
     <!-- Downloads -->
-    <a href="https://www.spigotmc.org/resources/advanced-armor-stands.38513/" target="blank"><img align="center" src="https://img.shields.io/badge/Downloads-54,108-ED8B00?style=for-the-badge" alt="falyrion"/></a>
+    <a href="https://www.spigotmc.org/resources/advanced-armor-stands.38513/" target="blank"><img align="center" src="https://img.shields.io/badge/Downloads-54,192-ED8B00?style=for-the-badge" alt="falyrion"/></a>
 </p>
 
 # Advanced Armor Stands
@@ -95,12 +95,37 @@ The lastest Version `1.18.0` of this plugin requires java `17` or higher
 
 The config.yml-file contains configuration options for the plugin. To apply any changes, save the file and reload or restart your server.
 
-| Config-Path      | Default value | Description                                                                  |
-|------------------| ------------- |------------------------------------------------------------------------------|
-| spawnWithArms    | true          | Defines wheather new armor stands spawn with arms already turned on or not. If this config is set to `true`, then the value of the next config `placeWithArms`  will be ignored   |
-| placeWithArms    | true          | Defines wheather new armor stands placed by players with arms already turned on or not. This value is ignored when `spawnWithArms` is set to `true` |
-| ownershipOfPlacedArms | false           | Defines if only the player who `placed` the armor stand can modify its poses              |
-| commandEditRange | 100           | Defines the max range in which commands can effect armor stands              |
+<table>
+    <thead>
+        <tr>
+            <td>Config-Path</td>
+            <td>Default value</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>  <!-- spawnWithArms -->
+            <td>spawnWithArms</td>
+            <td>1</td>
+            <td>
+                <ul>
+                    <li>0 = Armorstands will NOT spawn with arms</li>
+                    <li>1 = ALL armorstands will spawn with arms</li>
+                    <li>2 = Only armorstands placed by players will spawn with arms</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>  <!-- ownershipOfPlacedArms -->
+            <td>ownershipOfPlacedArms</td>
+            <td>false</td>
+            <td>If true, only the player who placed the armor stands can modify them via commands or the menu. Armor stands that are spawned by other ways will not be effected by this setting and can be modified by everyone.</td>
+        </tr>
+        <tr>  <!-- commandEditRange -->
+            <td>commandEditRange</td>
+            <td>100</td>
+            <td>Defines the max range in which commands can effect armor stands</td>
+        </tr>
+</table>
 
 <a name="language"></a>
 # Languages
