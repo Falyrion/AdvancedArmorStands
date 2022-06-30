@@ -39,7 +39,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
     private GUI gui;
 
-    public String aaVersion = "v.1.18.1.0";  // Don't forget to update version in plugin.yml and config.yml too!
+    public String aaVersion = "v.1.19.0.0";  // Don't forget to update version in plugin.yml and config.yml too!
     public String apiVersion = "1.17+";
     public static final String ARMOR_STAND_OWNER_KEY = "aa-owner";
 
