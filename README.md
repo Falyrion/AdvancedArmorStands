@@ -6,7 +6,7 @@
     <!-- Spigot -->
     <a href="https://www.spigotmc.org/" target="blank"><img align="center" src="https://img.shields.io/badge/Made%20for-spigot-FF6F00?style=for-the-badge" alt="falyrion"/></a>
     <!-- Downloads -->
-    <a href="https://www.spigotmc.org/resources/advanced-armor-stands.38513/" target="blank"><img align="center" src="https://img.shields.io/badge/Downloads-54,192-ED8B00?style=for-the-badge" alt="falyrion"/></a>
+    <a href="https://www.spigotmc.org/resources/advanced-armor-stands.38513/" target="blank"><img align="center" src="https://img.shields.io/badge/Downloads-54,338-ED8B00?style=for-the-badge" alt="falyrion"/></a>
 </p>
 
 # Advanced Armor Stands
