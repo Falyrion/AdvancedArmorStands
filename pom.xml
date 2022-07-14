@@ -2,16 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <modelVersion>4.0.0</modelVersion>
    <groupId>com.falyrion.aa</groupId>
-   <artifactId>AdvancedArmorStandsMain</artifactId>
-   <version>1.18.0</version>
-   <packaging>jar</packaging>
-   <name>AdvancedArmorStandsMain</name>
+   <artifactId>AdvancedArmorStands</artifactId>
+   <version>1.19.0</version>
+
    <properties>
       <java.version>17</java.version>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    </properties>
+
    <build>
       <plugins>
+         <!-- Maven -->
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -21,45 +22,24 @@
                <target>${java.version}</target>
             </configuration>
          </plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>3.2.4</version>
-            <executions>
-               <execution>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>shade</goal>
-                  </goals>
-                  <configuration>
-                     <createDependencyReducedPom>false</createDependencyReducedPom>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
       </plugins>
-      <resources>
-         <resource>
-            <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-         </resource>
-      </resources>
    </build>
+
    <repositories>
+      <!-- Spigot -->
       <repository>
          <id>spigotmc-repo</id>
          <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
       </repository>
-      <repository>
-         <id>sonatype</id>
-         <url>https://oss.sonatype.org/content/groups/public/</url>
-      </repository>
+      <!-- Minecraft (for player heads) -->
       <repository>
          <id>minecraft-repo</id>
          <url>https://libraries.minecraft.net/</url>
       </repository>
    </repositories>
+
    <dependencies>
+      <!-- Spigot -->
       <dependency>
          <groupId>org.spigotmc</groupId>
          <artifactId>spigot-api</artifactId>
@@ -81,4 +61,5 @@
             <scope>provided</scope>
         </dependency>
    </dependencies>
+
 </project>
