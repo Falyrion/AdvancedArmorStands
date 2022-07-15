@@ -2,11 +2,12 @@
 
 <p align="center">
     <!-- Java -->
-    <a target="blank"><img align="center" src="https://img.shields.io/badge/Made%20with-Java-orange?style=for-the-badge&logo=Java" alt="falyrion"/></a>
+    <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/Made%20with-Java-orange?style=for-the-badge&logo=Java" alt="java"/></a>
     <!-- Spigot -->
-    <a href="https://www.spigotmc.org/" target="blank"><img align="center" src="https://img.shields.io/badge/Made%20for-spigot-FF6F00?style=for-the-badge" alt="falyrion"/></a>
+    <a href="https://www.spigotmc.org/" target="_blank" rel="noreferrer"> <img src="https://img.shields.io/badge/Made%20for-spigot-FF6F00?style=for-the-badge" alt="spigot"/></a>
     <!-- Downloads -->
-    <a href="https://www.spigotmc.org/resources/advanced-armor-stands.38513/" target="blank"><img align="center" src="https://img.shields.io/badge/Downloads-54,338-ED8B00?style=for-the-badge" alt="falyrion"/></a>
+    <a href="https://www.spigotmc.org/resources/advanced-armor-stands.38513/" target="_blank" rel="noreferrer"> <img src="https://img.shields.io/spiget/downloads/38513?color=007ec6&label=Downloads%20(Spigot)&style=for-the-badge" alt="downloads"/></a>
+    <!-- Current online servers -->
 </p>
 
 # Advanced Armor Stands
@@ -99,7 +100,7 @@ The config.yml-file contains configuration options for the plugin. To apply any 
     <thead>
         <tr>
             <td>Config-Path</td>
-            <td>Default value</td>
+            <td>Default Value</td>
             <td>Description</td>
         </tr>
     </thead>
