@@ -96,7 +96,7 @@ The lastest Version `1.18.0` of this plugin requires java `17` or higher
 
 The config.yml-file contains configuration options for the plugin. To apply any changes, save the file and reload or restart your server.
 
-> ❗ If you are looking to disable player heads, please refer to the Permissions-Section. To disable player heads you have to set the permission `aa.heads` to `false`.
+> ❗ If you are looking to disable player heads, please refer to the Permissions-Section. To disable player heads you have to set the permission `aa.head` to `false`.
 
 <table>
     <thead>
