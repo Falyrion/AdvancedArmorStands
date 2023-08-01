@@ -25,7 +25,7 @@ This is a plugin for Minecraft-CraftBukkit/ Spigot, adding more functionality fo
 - [Languages](#language)
 
 <a name="overview"></a>
-# Overview
+# ✨ Overview
 
 Access all the hidden vanilla armor stands options with an easy menu. Perfect for decoration on survival servers and builders!
 
@@ -46,14 +46,14 @@ Just stand next to the armor stand you want to modify and type the command `/aa`
 
 
 <a name="depencies"></a>
-# Dependencies
+# ✨ Dependencies
 
 This plugin was made for Spigot v.1.17 and later versions.
 
 The lastest Version `1.18.0` of this plugin requires java `17` or higher
 
 <a name="commands"></a>
-# Commands and Permissions
+# ✨ Commands and Permissions
 
 ### Pose command cheat sheet
 
@@ -92,9 +92,11 @@ The lastest Version `1.18.0` of this plugin requires java `17` or higher
 | /aa give \<amount>                                 |  NONE      | Adds an armor stand to your inventory. Player needs creative mode to use this. | 
 
 <a name="config"></a>
-# Config
+# ✨ Config
 
 The config.yml-file contains configuration options for the plugin. To apply any changes, save the file and reload or restart your server.
+
+> ❗ If you are looking to disable player heads, please refer to the Permissions-Section. To disable player heads you have to set the permission `aa.heads` to `false`.
 
 <table>
     <thead>
@@ -129,7 +131,7 @@ The config.yml-file contains configuration options for the plugin. To apply any 
 </table>
 
 <a name="language"></a>
-# Languages
+# ✨ Languages
 
 AdvancedArmorStands can support multiple languages simultaneously. The language used is the language the user has set in his game settings. If that language is not available, english is the default option.
 
