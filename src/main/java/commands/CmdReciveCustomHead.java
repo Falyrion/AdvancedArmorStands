@@ -46,7 +46,7 @@ public class CmdReciveCustomHead implements CommandInterface {
                 // Get texture value
                 String textureValue = getTexture(playerName);
 
-                // Check for sucess
+                // Check for success
                 if (textureValue == null) {
                     String errorMessage = AdvancedArmorStandsMain.getInstance().getMessageString("head_error_01", player.getLocale());
                     player.sendMessage(ChatColor.RED + errorMessage);
@@ -61,7 +61,7 @@ public class CmdReciveCustomHead implements CommandInterface {
                 assert headMeta != null;
 
                 // Set Game Profile
-                GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+                GameProfile profile = new GameProfile(UUID.randomUUID(), "Head_" + playerName);
                 profile.getProperties().put("textures", new Property("textures", textureValue));
 
                 try {

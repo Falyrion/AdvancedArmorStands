@@ -1,7 +1,7 @@
 name: AdvancedArmorStands
 author: Falyrion
 description: Easy editing of armor stands and player heads
-version: 1.19.0.0
+version: 1.19.1.0
 api-version: 1.17
 
 main: com.falyrion.aa.AdvancedArmorStandsMain
