@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -61,7 +62,8 @@ public class CmdReciveCustomHead implements CommandInterface {
                 assert headMeta != null;
 
                 // Set Game Profile
-                GameProfile profile = new GameProfile(UUID.randomUUID(), "Head_" + playerName);
+                GameProfile profile = new GameProfile(UUID.randomUUID(),
+                        RandomStringUtils.randomAlphabetic(16));
                 profile.getProperties().put("textures", new Property("textures", textureValue));
 
                 try {
@@ -108,7 +110,6 @@ public class CmdReciveCustomHead implements CommandInterface {
         return true;
 
     }
-
 
     public String getTexture (String name) {
         try {
