@@ -1,7 +1,5 @@
 package com.falyrion.aa;
 
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,6 +11,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.util.EulerAngle;
+
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 
 
 public class InventoryClickHandler implements Listener {
@@ -660,7 +661,7 @@ public class InventoryClickHandler implements Listener {
             // Nav Cross
 
             case "§e§lForward":
-                if (player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.move")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -686,7 +687,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lBackwards":
-                if (player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.move")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){
@@ -712,7 +713,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lRight":
-                if (player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.move")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -738,7 +739,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lLeft":
-                if (player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.move")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -767,7 +768,7 @@ public class InventoryClickHandler implements Listener {
             // Move up and down
 
             case "§e§lUp":
-                if (player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.move")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -793,7 +794,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lDown":
-                if (player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.move")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -822,7 +823,7 @@ public class InventoryClickHandler implements Listener {
             // Rotate
 
             case "§e§lRotate left":
-                if (player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.move")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)) {
@@ -848,7 +849,7 @@ public class InventoryClickHandler implements Listener {
                 break;
 
             case "§e§lRotate right":
-                if (player.hasPermission("aa.tp")) {
+                if (player.hasPermission("aa.move")) {
                     for (Entity entity : player.getNearbyEntities(distance, distance, distance)) {
                         if (entity instanceof ArmorStand armorStand) {
                             if (!AdvancedArmorStandsMain.getInstance().canChange(armorStand, player)){

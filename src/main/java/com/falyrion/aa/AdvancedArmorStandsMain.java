@@ -1,8 +1,9 @@
 package com.falyrion.aa;
 
-import commands.*;
-import event_listener.PlacedHandler;
-import event_listener.SpawnHandler;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -18,9 +19,32 @@ import org.bukkit.event.Listener;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Logger;
+import commands.CmdClone;
+import commands.CmdGetArmorstandData;
+import commands.CmdGiveArmorstand;
+import commands.CmdGlow;
+import commands.CmdInfo;
+import commands.CmdReciveCustomHead;
+import commands.CmdRemoveCustomName;
+import commands.CmdSetBodyPose;
+import commands.CmdSetCustomName;
+import commands.CmdSetGravity;
+import commands.CmdSetHeadPose;
+import commands.CmdSetInvulnerable;
+import commands.CmdSetLeftArmPose;
+import commands.CmdSetLeftLegPose;
+import commands.CmdSetRightArmPose;
+import commands.CmdSetRightLegPose;
+import commands.CmdSetRotation;
+import commands.CmdSetSize;
+import commands.CmdSetVisibility;
+import commands.CmdShowMenuMain;
+import commands.CmdMove;
+import commands.CmdTeleport;
+import commands.CmdToogleArms;
+import commands.CmdToogleBaseplate;
+import event_listener.PlacedHandler;
+import event_listener.SpawnHandler;
 
 public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
 
@@ -72,6 +96,7 @@ public class AdvancedArmorStandsMain extends JavaPlugin implements Listener {
         commandHandler.registerCommand("head", new CmdReciveCustomHead());
         commandHandler.registerCommand("rotate", new CmdSetRotation());
         commandHandler.registerCommand("stats", new CmdGetArmorstandData());
+        commandHandler.registerCommand("move", new CmdMove());
         commandHandler.registerCommand("tp", new CmdTeleport());
         commandHandler.registerCommand("clone", new CmdClone());
         commandHandler.registerCommand("give", new CmdGiveArmorstand());

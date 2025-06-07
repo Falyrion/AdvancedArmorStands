@@ -25,8 +25,11 @@ permissions:
     default: true
     description: Enables/ Disables ability to give amor stands names.
   aa.tp:
+    default: false
+    description: Enables/ Disables the ability to move armorstands around with commands.
+  aa.move:
     default: true
-    description: Enables/ Disables the ability to move armorstands around, both with commands or the Menu.
+    description: Enables/ Disables the ability to move armorstands around with the GUI Menu.
   aa.clone:
     default: true
     description: Enables/ Disables the ability to clone armorstands with existing settings. Players in creative mode will also copy equipment.
